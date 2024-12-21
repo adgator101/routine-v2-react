@@ -41,10 +41,10 @@ export default {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
-  ],
+  // plugins: [
+  //   require('@tailwindcss/forms'),
+  //   require('@tailwindcss/typography'),
+  //   require('@tailwindcss/aspect-ratio'),
+  // ],
   darkMode: 'class',
 }
