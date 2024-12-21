@@ -5,14 +5,14 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
-react(),
- createHtmlPlugin({
+    react(),
+    createHtmlPlugin({
       inject: {
         data: {
-          title: 'My Vite App',
-          description: 'Production-ready Vite setup',
+          title: 'Routine-BIC',
+          description: 'A routine planning application',
         },
       },
     }),
-],
+  ],
 })
