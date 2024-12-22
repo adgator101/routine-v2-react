@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html{
+body, html, #root{
   height: 100%;
   width: 100%;
 }
@@ -46,7 +46,7 @@ body, html{
     .btn-primary {
       @apply inline-flex items-center px-4 py-2 border border-transparent 
              text-sm font-medium rounded-md shadow-sm text-white 
-             bg-indigo-600 hover:bg-indigo-700 
+             bg-accent hover:bg-accent/80 
              focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
              transition-colors duration-200;
     }
