@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body, html{
+  height: 100%;
+  width: 100%;
+}
 
 @layer utilities {
     /* Layout */
@@ -57,8 +61,8 @@
   
     /* Cards */
     .card {
-      @apply bg-white dark:bg-gray-800 rounded-lg shadow-md 
-             overflow-hidden border border-gray-200 dark:border-gray-700;
+      @apply bg-[#ececec] dark:bg-gray-800 rounded-lg shadow-md 
+             overflow-hidden border-l-8 border-[#ffdaa7] dark:border-gray-700;
     }
   
     .card-hover {
@@ -91,18 +95,7 @@
       @apply w-full h-full object-cover object-center;
     }
   
-    /* Status Indicators */
-    .badge-success {
-      @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs 
-             font-medium bg-green-100 text-green-800 
-             dark:bg-green-800 dark:text-green-100;
-    }
-  
-    .badge-error {
-      @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs 
-             font-medium bg-red-100 text-red-800 
-             dark:bg-red-800 dark:text-red-100;
-    }
+
   
     /* Navigation */
     .nav-link {
@@ -115,3 +108,12 @@
       @apply text-indigo-600 dark:text-indigo-400 font-semibold;
     }
   }
+
+
+@layer base {
+  :root {
+
+
+        --radius: 0.5rem
+    }
+}

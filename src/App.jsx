@@ -1,8 +1,10 @@
 import React from 'react'
-import NavBar from './components/NavBar.jsx'
+import TodoCard from './components/TodoCard'
+import TodoSection from './components/TodoSection'
+
 const App = () => {
   return (
-    <NavBar />
+    <TodoSection />
   )
 }
 
