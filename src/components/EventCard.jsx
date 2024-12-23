@@ -1,8 +1,8 @@
 import { MapPin } from "lucide-react";
 import React from "react";
-const EventCard = () => {
+const EventCard = ({ title, daysLeft, location, image }) => {
   return (
-    <div className="flex w-4/12 flex-col gap-6 rounded-lg bg-gray-200 px-3 py-4 shadow-md">
+    <div className="flex flex-col gap-6 rounded-lg bg-gray-200 px-3 py-4 shadow-md mt-4">
       <div className="event-card-top flex items-center gap-10">
         <div className="event-card-image">
           <img
@@ -11,12 +11,12 @@ const EventCard = () => {
             width={100}
           />
         </div>
-        <div className="event-type text-2xl">Cyber Security 101</div>
+        <div className="event-type text-2xl">{title}</div>
       </div>
       <div className="event-card-bottom flex items-center gap-10">
         <div className="event-card-countdown flex gap-1 text-[#505070]">
           <div className="event-card-countdown-time text-4xl font-extrabold">
-            16D
+            {daysLeft}
           </div>
           <div className="event-card-countdown-extra-info self-end text-sm">
             left
@@ -24,7 +24,7 @@ const EventCard = () => {
         </div>
         <div className="event-location flex items-center gap-1">
           <MapPin fill="gray" />
-          <p>Biratnagar International College</p>
+          <p>{location}</p>
         </div>
       </div>
     </div>
