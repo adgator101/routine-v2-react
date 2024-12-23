@@ -1,6 +1,6 @@
 import React from "react";
 
-const RoutineCard = ({ title, time, room, classType }) => {
+const RoutineCard = ({ data }) => {
   return (
     <div>
       <div className="card card-hover flex-between mx-3 my-5 min-h-[80px] px-5 py-3 sm:mx-auto sm:w-2/3 md:h-auto">
@@ -13,16 +13,18 @@ const RoutineCard = ({ title, time, room, classType }) => {
             />
           </div>
           <div className="class-details">
-            <div className="title text-sm font-bold md:text-lg">{title}</div>
+            <div className="title text-sm font-bold md:text-lg">
+              {data["Module Title"]}
+            </div>
             <div className="time-room flex items-center gap-2 text-xs text-[#93939a] md:text-sm">
-              <div className="time">{time}</div>
+              <div className="time">{data.Time}</div>
               <div className="separator h-1 w-1 rounded-full bg-[#93939a]"></div>
-              <div className="room">{room}</div>
+              <div className="room">{data.Room}</div>
             </div>
           </div>
         </div>
         <button className="flex-center m-1 h-7 w-7 rounded-full bg-white p-3 text-xs font-bold text-red-500 shadow-xl md:p-4 md:text-base">
-          {classType}
+          {data["Class Type"].slice(0, 1)}
         </button>
       </div>
     </div>
