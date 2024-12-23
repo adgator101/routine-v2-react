@@ -50,11 +50,11 @@ export default {
   		}
   	}
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
-      require("tailwindcss-animate")
-],
+//   plugins: [
+//     require('@tailwindcss/forms'),
+//     require('@tailwindcss/typography'),
+//     require('@tailwindcss/aspect-ratio'),
+//       require("tailwindcss-animate")
+// ],
   darkMode: ['class', "class"],
 }

@@ -1,29 +1,60 @@
 import React from "react";
+import { Calendar, Clock, MapPin } from "lucide-react";
 
-const RoutineCard = ({ title, time, room, classType }) => {
+const RoutineCard = ({ data }) => {
   return (
-    <div>
-      <div className="card card-hover flex-between mx-3 my-5 min-h-[80px] px-5 py-3 sm:mx-auto sm:w-2/3 md:h-auto">
-        <div className="flex-center gap-5">
-          <div className="teacher-pfp flex-shrink-0">
+    <div className="font-manrope flex justify-center cursor-pointer">
+      <div 
+        className="group  relative mx-3 my-4 flex min-h-[90px] w-full lg:max-w-4xl items-center justify-between rounded-lg bg-white p-5 shadow-sm border border-t transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:px-6"
+      >
+        {/* Status Indicator */}
+        <div className="absolute left-0 top-0 h-full w-1 rounded-l-lg bg-accent/80" />
+
+        {/* Hover Gradient Overlay */}
+        <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-accent/5 to-blue/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+        {/* Left Section: Profile and Details */}
+        <div className="relative flex flex-1 items-center gap-4 sm:gap-6">
+          <div className="relative flex-shrink-0 after:absolute after:inset-0 after:rounded-full after:shadow-sm after:transition-shadow after:duration-300 group-hover:after:shadow-md">
             <img
-              className="w-10 cursor-pointer rounded-full transition-transform hover:scale-110 md:w-16"
-              src="https://wallpapers.com/images/high/confused-patrick-random-pfp-x63wp9vs43cem64s.webp"
-              alt="pfp"
+              className="h-12 w-12 rounded-full object-cover transition-transform duration-300 group-hover:scale-105 sm:h-14 sm:w-14"
+              src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-routine-psychology-flaticons-lineal-color-flat-icons-2.png"
+              alt={`${data["Module Title"]} instructor`}
             />
+            <div className="absolute -bottom-1 -right-1 h-4 w-4 rounded-full border-2 border-white bg-card-3 shadow-sm" />
           </div>
-          <div className="class-details">
-            <div className="title text-sm font-bold md:text-lg">{title}</div>
-            <div className="time-room flex items-center gap-2 text-xs text-[#93939a] md:text-sm">
-              <div className="time">{time}</div>
-              <div className="separator h-1 w-1 rounded-full bg-[#93939a]"></div>
-              <div className="room">{room}</div>
+
+          <div className="flex flex-1 flex-col gap-1.5">
+            <h3 className="line-clamp-1 text-lg font-medium text-dark transition-colors group-hover:text-accent">
+              {data["Module Title"]}
+            </h3>
+            
+            <div className="flex flex-wrap gap-4 text-sm text-dark/70">
+              <div className="flex items-center gap-1.5 transition-transform duration-300 hover:scale-105">
+                <Clock className="h-4 w-4 text-accent" />
+                <span>{data.Time}</span>
+              </div>
+              <div className="flex items-center gap-1.5 transition-transform duration-300 hover:scale-105">
+                <MapPin className="h-4 w-4 text-blue" />
+                <span>{data.Room}</span>
+              </div>
             </div>
           </div>
         </div>
-        <button className="flex-center m-1 h-7 w-7 rounded-full bg-white p-3 text-xs font-bold text-red-500 shadow-xl md:p-4 md:text-base">
-          {classType}
-        </button>
+
+        {/* Right Section */}
+        <div className="flex items-center gap-3">
+          <div className="flex h-9 items-center rounded-full bg-card-2/50 px-4 text-sm font-medium text-dark shadow-sm transition-all duration-300 group-hover:bg-card-2">
+            {data["Class Type"]}
+          </div>
+          
+          <button 
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 text-dark/70 shadow-sm transition-all duration-300 hover:scale-105 hover:bg-card-1/30 hover:text-accent hover:shadow-md active:scale-95"
+            aria-label="Add to calendar"
+          >
+            <Calendar className="h-5 w-5" />
+          </button>
+        </div>
       </div>
     </div>
   );

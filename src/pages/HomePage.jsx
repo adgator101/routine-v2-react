@@ -1,9 +1,23 @@
-import React from 'react'
-
+import NavBar from "@/components/NavBar";
+import React from "react";
+import TodoSection from "@/components/TodoSection";
+import AboutPage from "@/components/AboutPage";
+import RoutineSection from "@/components/RoutineSection";
 const HomePage = () => {
-  return (
-    <div>HomePage</div>
-  )
-}
+  const [activeItem, setActiveItem] = React.useState("routine");
 
-export default HomePage
+  return (
+    <>
+      <div>
+        <NavBar activeItem={activeItem} setActiveItem={setActiveItem} />
+        <div className="p-4 mt-6">
+          {activeItem === "routine" && <RoutineSection />}
+          {activeItem === "todo" && <TodoSection />}
+          {activeItem === "about us" && <AboutPage />}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default HomePage;
