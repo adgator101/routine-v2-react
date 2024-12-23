@@ -12,30 +12,40 @@ const DateButton = ({ handleSelect, selectedDay }) => {
   });
 
   return (
-    <div className="date-buttons flex flex-wrap justify-center gap-4 p-4">
-      {daysOfWeek.map((day, index) => (
-        <button
-          key={index}
-          className={`group relative overflow-hidden rounded-xl px-6 py-4 font-bold shadow-lg transition-transform ${
-            selectedDay === day ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white" : "bg-white text-gray-700"
-          } hover:scale-105 hover:shadow-xl`}
-          onClick={() => handleSelect(day)}
-        >
-          <div
-            className={`absolute inset-0 h-full w-full bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 opacity-70 transition-transform duration-300 ${
-              selectedDay === day ? 'scale-100' : 'scale-0 group-hover:scale-100'
-            }`}
-          ></div>
-          <div className="relative z-10 text-2xl font-extrabold">{datesOfWeek[index]}</div>
-          <div
-            className={`relative z-10 text-sm font-medium ${
-              selectedDay === day ? "text-white" : "text-gray-500"
-            }`}
+    <div className="date-buttons flex justify-center gap-4 lg:gap-6 p-4 mb-9">
+      {daysOfWeek.map((day, index) => {
+        const isSelected = selectedDay === day;
+
+        return (
+          <button
+            key={index}
+            onClick={() => handleSelect(day)}
+            className={`flex w-16 flex-col items-center rounded-xl px-3 py-2 lg:py-3 text-xs transition-all duration-200 lg:px-9 ${
+              isSelected
+                ? "bg-blue-500 shadow-blue-500/30 scale-105 text-white shadow-lg"
+                : "bg-white dark:bg-gray-900"
+            } hover:scale-105 hover:shadow-lg ${!isSelected && "hover:bg-gray-50 dark:hover:bg-gray-800"} border border-gray-200`}
           >
-            {day}
-          </div>
-        </button>
-      ))}
+            <span
+              className={`mb-1 lg:text-2xl text-sm font-bold ${
+                isSelected ? "text-black" : "text-gray-900"
+              } `}
+            >
+              {datesOfWeek[index]}
+            </span>
+            <span
+              className={`text-xs lg:text-sm font-medium ${
+                isSelected ? "text-black" : "text-gray-500"
+              } `}
+            >
+              {day}
+            </span>
+            {isSelected && (
+              <div class="mt-2 h-1 w-4 rounded-full bg-purple-400"></div>
+            )}
+          </button>
+        );
+      })}
     </div>
   );
 };
