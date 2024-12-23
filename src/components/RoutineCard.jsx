@@ -3,9 +3,9 @@ import { Calendar, Clock, MapPin } from "lucide-react";
 
 const RoutineCard = ({ data }) => {
   return (
-    <div className="font-manrope flex justify-center">
+    <div className="font-manrope flex justify-center cursor-pointer">
       <div 
-        className="group  relative mx-3 my-4 flex min-h-[90px] w-full max-w-2xl items-center justify-between rounded-lg bg-white p-5 shadow-sm border border-t transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:px-6"
+        className="group  relative mx-3 my-4 flex min-h-[90px] w-full lg:max-w-4xl items-center justify-between rounded-lg bg-white p-5 shadow-sm border border-t transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:px-6"
       >
         {/* Status Indicator */}
         <div className="absolute left-0 top-0 h-full w-1 rounded-l-lg bg-accent/80" />
