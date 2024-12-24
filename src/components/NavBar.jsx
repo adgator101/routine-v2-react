@@ -61,7 +61,6 @@ const NavItemMobile = ({ activeItem, setActiveItem }) => {
   );
 };
 
-// Main NavBar Component
 const NavBar = ({ activeItem, setActiveItem }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [showNotifications, setShowNotifications] = useState(false);
