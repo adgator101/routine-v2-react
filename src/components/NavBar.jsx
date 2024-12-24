@@ -1,4 +1,4 @@
-import { Bell, House, ListCheck, User } from "lucide-react";
+import { Bell, House, ListCheck, Moon, Sun, User } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Notification from "./Notification";
 
@@ -8,11 +8,11 @@ const NavItem = ({ activeItem, setActiveItem }) => {
     <ul className="flex gap-6">
       {navItems.map((item) => (
         <li
-          className={`group relative cursor-pointer select-none overflow-hidden rounded-xl px-6 py-2.5 font-medium transition-all duration-300 hover:bg-accent/5
-            ${activeItem === item 
-              ? "bg-accent text-white shadow-lg shadow-accent/25" 
+          className={`group relative cursor-pointer select-none overflow-hidden rounded-xl px-6 py-2.5 font-medium transition-all duration-300 hover:bg-accent/5 ${
+            activeItem === item
+              ? "bg-accent text-white shadow-lg shadow-accent/25"
               : "text-dark hover:text-accent"
-            }`}
+          }`}
           key={item}
           onClick={() => setActiveItem(item)}
         >
@@ -42,14 +42,14 @@ const NavItemMobile = ({ activeItem, setActiveItem }) => {
               <li
                 key={item.label}
                 onClick={() => setActiveItem(item.label)}
-                className={`group relative cursor-pointer rounded-xl p-3 transition-all duration-300
-                  ${isActive ? "bg-accent/10" : "hover:bg-gray-50"}`}
+                className={`group relative cursor-pointer rounded-xl p-3 transition-all duration-300 ${isActive ? "bg-accent/10" : "hover:bg-gray-50"}`}
               >
                 <div className="flex flex-col items-center gap-1">
                   {React.cloneElement(item.icon, {
                     size: 20,
                     color: isActive ? "#F84178" : "#252539",
-                    className: "transition-transform duration-300 group-hover:scale-110"
+                    className:
+                      "transition-transform duration-300 group-hover:scale-110",
                   })}
                 </div>
               </li>
@@ -63,6 +63,7 @@ const NavItemMobile = ({ activeItem, setActiveItem }) => {
 
 // Main NavBar Component
 const NavBar = ({ activeItem, setActiveItem }) => {
+  const [isLight, setisLight] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -99,30 +100,45 @@ const NavBar = ({ activeItem, setActiveItem }) => {
             </div>
           )}
         </div>
-
-        {/* Right - Notifications */}
-        <button
-          className="group relative rounded-full bg-card-1/50 p-3 transition-all duration-300 hover:scale-105 hover:bg-card-1 hover:shadow-md active:scale-95"
-          aria-label="Notifications"
-          onClick={toggleNotifications}
-        >
-          <Bell className="h-5 w-5 text-accent transition-transform duration-300 group-hover:scale-110" />
-          <span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-medium text-white">
-            3
-          </span>
-        </button>
+        <div className="flex-center gap-3">
+          {/* Light/Dark Mode */}
+          <button
+            onClick={() => setisLight(!isLight)}
+            className="rounded-lg border-2 border-gray-200 p-1 transition-all duration-300 active:bg-gray-300"
+          >
+            <div
+              className={`transition-transform duration-500 ${isLight ? "rotate-180" : "rotate-360"}`}
+            >
+              {isLight ? <Sun size={28} /> : <Moon size={28} />}
+            </div>
+          </button>
+          {/* Right - Notifications */}
+          <button
+            className="group relative rounded-full bg-card-1/50 p-3 transition-all duration-300 hover:scale-105 hover:bg-card-1 hover:shadow-md active:scale-95"
+            aria-label="Notifications"
+            onClick={toggleNotifications}
+          >
+            <Bell className="h-5 w-5 text-accent transition-transform duration-300 group-hover:scale-110" />
+            <span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-medium text-white">
+              3
+            </span>
+          </button>
+        </div>
       </div>
 
       {/* Notification Component */}
-      <Notification 
-        isVisible={showNotifications} 
-        onClose={() => setShowNotifications(false)} 
+      <Notification
+        isVisible={showNotifications}
+        onClose={() => setShowNotifications(false)}
       />
 
       {/* Mobile Navigation */}
       {isMobile && (
         <div className="flex-1 text-center">
-          <NavItemMobile activeItem={activeItem} setActiveItem={setActiveItem} />
+          <NavItemMobile
+            activeItem={activeItem}
+            setActiveItem={setActiveItem}
+          />
         </div>
       )}
     </nav>
