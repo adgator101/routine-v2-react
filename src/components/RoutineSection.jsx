@@ -34,9 +34,13 @@ const RoutineSection = () => {
   return (
     <>
       <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
-      {todayRoutine.map((routine, index) => (
-        <RoutineCard key={index} data={routine} />
-      ))}
+      {todayRoutine.length > 0 ? (
+        todayRoutine.map((routine, index) => (
+          <RoutineCard key={index} data={routine} />
+        ))
+      ) : (
+        <div>No classes found for the selected day.</div>
+      )}
       {!user && <Onboarding setUserGroup={handleUserGroup} />}
     </>
   );
