@@ -61,11 +61,16 @@ const NavItemMobile = ({ activeItem, setActiveItem }) => {
   );
 };
 
-// Main NavBar Component
 const NavBar = ({ activeItem, setActiveItem }) => {
   const [isLight, setisLight] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userFromStorage = localStorage.getItem('user');
+    setUser(userFromStorage);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -87,8 +92,8 @@ const NavBar = ({ activeItem, setActiveItem }) => {
             <div className="absolute inset-0 rounded-full shadow-sm transition-shadow duration-300 group-hover:shadow-md" />
           </div>
           <div className="space-y-0.5">
-            <div className="font-semibold text-dark">Hi, Ganesh</div>
-            <div className="text-sm text-dark/70">Computer Science, L4CG3</div>
+            <div className="font-semibold text-dark">Hi, {user?.name || 'Student'}</div>
+            <div className="text-sm text-dark/70">{user?.program || 'Computer Science'}, {user || 'L4CG3'}</div>
           </div>
         </div>
 
