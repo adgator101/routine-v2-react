@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: ['class'],
   theme: {
   	extend: {
   		colors: {
@@ -56,5 +57,4 @@ export default {
 //     require('@tailwindcss/aspect-ratio'),
 //       require("tailwindcss-animate")
 // ],
-  darkMode: ['class', "class"],
 }
