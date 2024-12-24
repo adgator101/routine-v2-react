@@ -1,5 +1,6 @@
 import { Bell, House, ListCheck, User } from "lucide-react";
 import React, { useEffect, useState } from "react";
+import Notification from "./Notification";
 
 const NavItem = ({ activeItem, setActiveItem }) => {
   const navItems = ["routine", "todo", "about us"];
@@ -23,7 +24,7 @@ const NavItem = ({ activeItem, setActiveItem }) => {
   );
 };
 
-
+// NavItemMobile Component for Mobile Navigation
 const NavItemMobile = ({ activeItem, setActiveItem }) => {
   const navItems = [
     { icon: <House />, label: "routine" },
@@ -50,9 +51,6 @@ const NavItemMobile = ({ activeItem, setActiveItem }) => {
                     color: isActive ? "#F84178" : "#252539",
                     className: "transition-transform duration-300 group-hover:scale-110"
                   })}
-                  {/* <span className={`text-xs ${isActive ? "text-accent" : "text-dark/70"}`}>
-                    {item.label}
-                  </span> */}
                 </div>
               </li>
             );
@@ -63,15 +61,20 @@ const NavItemMobile = ({ activeItem, setActiveItem }) => {
   );
 };
 
-
+// Main NavBar Component
 const NavBar = ({ activeItem, setActiveItem }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const toggleNotifications = () => {
+    setShowNotifications((prevState) => !prevState);
+  };
 
   return (
     <nav className="relative border-b border-gray-100 font-poppins shadow-sm">
@@ -88,19 +91,20 @@ const NavBar = ({ activeItem, setActiveItem }) => {
           </div>
         </div>
 
+        {/* NavItems for Desktop */}
         <div>
-
-       
-        {!isMobile && (
-          <div className="flex-1 text-center">
-            <NavItem activeItem={activeItem} setActiveItem={setActiveItem} />
-          </div>
-        )}
+          {!isMobile && (
+            <div className="flex-1 text-center">
+              <NavItem activeItem={activeItem} setActiveItem={setActiveItem} />
+            </div>
+          )}
         </div>
+
         {/* Right - Notifications */}
         <button
           className="group relative rounded-full bg-card-1/50 p-3 transition-all duration-300 hover:scale-105 hover:bg-card-1 hover:shadow-md active:scale-95"
           aria-label="Notifications"
+          onClick={toggleNotifications}
         >
           <Bell className="h-5 w-5 text-accent transition-transform duration-300 group-hover:scale-110" />
           <span className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-medium text-white">
@@ -109,12 +113,18 @@ const NavBar = ({ activeItem, setActiveItem }) => {
         </button>
       </div>
 
+      {/* Notification Component */}
+      <Notification 
+        isVisible={showNotifications} 
+        onClose={() => setShowNotifications(false)} 
+      />
+
       {/* Mobile Navigation */}
       {isMobile && (
-          <div className="flex-1 text-center">
-            <NavItemMobile activeItem={activeItem} setActiveItem={setActiveItem} />
-          </div>
-        )}
+        <div className="flex-1 text-center">
+          <NavItemMobile activeItem={activeItem} setActiveItem={setActiveItem} />
+        </div>
+      )}
     </nav>
   );
 };

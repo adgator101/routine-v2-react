@@ -41,7 +41,7 @@ const DateButton = ({ handleSelect, selectedDay }) => {
               {day}
             </span>
             {isSelected && (
-              <div class="mt-2 h-1 w-4 rounded-full bg-purple-400"></div>
+              <div className="mt-2 h-1 w-4 rounded-full bg-purple-400"></div>
             )}
           </button>
         );
