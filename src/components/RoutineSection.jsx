@@ -4,6 +4,8 @@ import RoutineCard from "./RoutineCard";
 import RoutineData from "../../class-routine.json";
 import { getTodayDay } from "@/lib/utils";
 import Onboarding from "@/components/Onboarding";
+import EventCard from "./EventCard";
+
 const RoutineSection = () => {
   const [todayRoutine, setTodayRoutine] = React.useState([]);
   const [selectedDay, setSelectedDay] = React.useState("");
@@ -33,15 +35,21 @@ const RoutineSection = () => {
   };
   return (
     <>
-      <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
-      {todayRoutine.length > 0 ? (
-        todayRoutine.map((routine, index) => (
-          <RoutineCard key={index} data={routine} />
-        ))
-      ) : (
-        <div>No classes found for the selected day.</div>
-      )}
-      {!user && <Onboarding setUserGroup={handleUserGroup} />}
+      <EventCard />
+      <div className="grid lg:grid-cols-[1.5fr_1fr]">
+        <div>
+          <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
+          {todayRoutine.length > 0 ? (
+            todayRoutine.map((routine, index) => (
+              <RoutineCard key={index} data={routine} />
+            ))
+          ) : (
+            <div>No classes found for the selected day.</div>
+          )}
+          {!user && <Onboarding setUserGroup={handleUserGroup} />}
+        </div>
+        <div>calendar</div>
+      </div>
     </>
   );
 };
