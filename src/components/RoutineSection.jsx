@@ -5,6 +5,7 @@ import RoutineData from "../../class-routine.json";
 import { getTodayDay } from "@/lib/utils";
 import Onboarding from "@/components/Onboarding";
 import EventCard from "./EventCard";
+import Assignment from "./Assignment";
 
 const RoutineSection = () => {
   const [todayRoutine, setTodayRoutine] = React.useState([]);
@@ -34,10 +35,10 @@ const RoutineSection = () => {
     );
   };
   return (
-    <>
-      <EventCard />
-      <div className="grid lg:grid-cols-[1.5fr_1fr]">
+    <div className="pb-16 md:pb-0">
+      <div className="grid gap-20 lg:grid-cols-[1.5fr_1fr] lg:gap-0">
         <div>
+          <EventCard />
           <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
           {todayRoutine.length > 0 ? (
             todayRoutine.map((routine, index) => (
@@ -48,9 +49,12 @@ const RoutineSection = () => {
           )}
           {!user && <Onboarding setUserGroup={handleUserGroup} />}
         </div>
-        <div>calendar</div>
+        <div className="space-y-10">
+          <div className="h-48 w-full rounded-lg border-2">Calendar</div>
+          <Assignment />
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

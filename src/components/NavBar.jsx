@@ -33,7 +33,7 @@ const NavItemMobile = ({ activeItem, setActiveItem }) => {
   ];
 
   return (
-    <div className="fixed bottom-6 w-full px-4">
+    <div className="fixed bottom-6 w-full px-4 z-10">
       <div className="mx-auto w-full max-w-md rounded-2xl bg-white/80 p-2 shadow-lg backdrop-blur-lg">
         <ul className="flex items-center justify-around">
           {navItems.map((item) => {
