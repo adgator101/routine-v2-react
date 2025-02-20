@@ -2,32 +2,35 @@ import { MapPin } from "lucide-react";
 import React from "react";
 const EventCard = ({ title, daysLeft, location, image }) => {
   return (
-    <div className="flex flex-col gap-6 rounded-lg bg-gray-200 px-3 py-4 shadow-md mt-4">
-      <div className="event-card-top flex items-center gap-10">
-        <div className="event-card-image">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/2299/2299172.png"
-            alt=""
-            width={100}
-          />
-        </div>
-        <div className="event-type text-2xl">{title}</div>
-      </div>
-      <div className="event-card-bottom flex items-center gap-10">
-        <div className="event-card-countdown flex gap-1 text-[#505070]">
-          <div className="event-card-countdown-time text-4xl font-extrabold">
-            {daysLeft}
+    <>
+      <p className="font-poppins text-2xl font-semibold">Upcoming Events</p>
+      <div className="my-5 grid gap-3 font-manrope sm:flex flex-wrap">
+        {[...Array(3)].map((_, index) => (
+          <div
+            key={index}
+            className="grid gap-3 rounded-lg p-3 shadow-sm transition-[shadow_transform] hover:shadow-md hover:scale-105 cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              <img
+                src="https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg"
+                alt="pic"
+                className="h-10 w-10 rounded-full"
+              />
+              <div className="grid">
+                <p className="text-lg font-bold">Cyber Security 101</p>
+                <p>
+                  <span className="font-semibold text-[#db2778]">16D </span>left
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <MapPin />
+              <p>Biratnagar International College</p>
+            </div>
           </div>
-          <div className="event-card-countdown-extra-info self-end text-sm">
-            left
-          </div>
-        </div>
-        <div className="event-location flex items-center gap-1">
-          <MapPin fill="gray" />
-          <p>{location}</p>
-        </div>
+        ))}
       </div>
-    </div>
+    </>
   );
 };
 
