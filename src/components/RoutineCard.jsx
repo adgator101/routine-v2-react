@@ -23,7 +23,7 @@ const RoutineCard = ({ data }) => {
           </div>
 
           <div className="sm:flex-between grid w-full gap-2 sm:gap-0">
-            <div className="flex flex-1 flex-col gap-1.5">
+            <div className="flex flex-1 flex-col gap-2.5">
               <h3 className="justify-between text-sm font-bold text-dark transition-colors dark:text-gray-100 sm:flex sm:text-base">
                 <p className="group-hover:text-accent">
                   {data["Module Title"]}
@@ -33,22 +33,22 @@ const RoutineCard = ({ data }) => {
                   <span className="text-sm text-gray-500">{data.Time}</span>
                 </div>
               </h3>
-              <div className="flex gap-2">
-                <div className="flex items-center justify-self-start rounded-full bg-card-2/50 px-4 py-1 text-xs font-medium text-dark shadow-sm transition-all duration-300 group-hover:bg-card-2 sm:justify-self-end sm:text-sm">
+              <div className="mb-1.5 mt-1 flex gap-2">
+                <div className="flex items-center justify-self-start rounded-full bg-card-2/50 px-4 py-1 text-xs font-medium text-dark shadow-sm transition-all duration-300 group-hover:bg-card-2 sm:justify-self-end">
                   {data["Class Type"]}
                 </div>
-                <div className="flex items-center justify-self-start rounded-full bg-card-2/50 px-4 py-1 text-xs font-medium text-dark shadow-sm transition-all duration-300 group-hover:bg-card-2 sm:justify-self-end sm:text-sm">
+                <div className="flex items-center justify-self-start rounded-full bg-card-2/50 px-4 py-1 text-xs font-medium text-dark shadow-sm transition-all duration-300 group-hover:bg-card-2 sm:justify-self-end">
                   {data["Module Code"]}
                 </div>
               </div>
               <div className="flex flex-wrap gap-2 text-xs text-dark/70 dark:text-gray-400 sm:gap-4 sm:text-sm">
                 <div className="flex items-center gap-1 transition-transform duration-300 hover:scale-105 sm:gap-1.5">
                   <MapPin className="h-3.5 w-3.5 text-blue sm:h-4 sm:w-4" />
-                  <span>{data.Room}</span>
+                  <span className="text-sm">{data.Room}</span>
                 </div>
                 <div className="flex items-center gap-1 transition-transform duration-300 hover:scale-105 sm:gap-1.5">
                   <BookOpen className="h-3.5 w-3.5 text-accent sm:h-4 sm:w-4" />
-                  <span>{data.Lecturer}</span>
+                  <span className="text-sm">{data.Lecturer}</span>
                 </div>
               </div>
             </div>
