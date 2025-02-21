@@ -35,10 +35,12 @@ const RoutineSection = () => {
     );
   };
   return (
-    <div className="pb-16 md:pb-0">
-      <div className="grid gap-20 lg:grid-cols-[1.5fr_1fr] lg:gap-0">
+    <div className="flex lg:flex-col pb-16 md:pb-0 lg:gap-6">
+      <div className="event-card">
+        <EventCard />
+      </div>
+      <div className="grid gap-20 lg:grid-cols-[1.5fr_1fr] lg:gap-10">
         <div>
-          <EventCard />
           <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
           {todayRoutine.length > 0 ? (
             todayRoutine.map((routine, index) => (

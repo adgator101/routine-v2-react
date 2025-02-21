@@ -92,8 +92,8 @@ const NavBar = ({ activeItem, setActiveItem }) => {
   };
 
   return (
-    <nav className="relative border-b border-gray-100 font-poppins shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 p-4 md:px-6">
+    <nav className="relative border-b border-gray-100 font-poppins">
+      <div className="flex items-center justify-between gap-4 py-4">
         {/* Left - User Details */}
         <div className="flex items-center gap-4">
           <div className="group relative h-12 w-12 overflow-hidden rounded-full transition-transform duration-300 hover:scale-105">
