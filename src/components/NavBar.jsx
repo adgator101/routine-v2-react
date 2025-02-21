@@ -1,24 +1,33 @@
 import { Bell, House, ListCheck, Moon, Sun, User } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Notification from "./Notification";
+import { Link } from "react-router-dom";
 
-const NavItem = ({ activeItem, setActiveItem }) => {
-  const navItems = ["routine", "todo", "about us"];
+const NavItem = () => {
+  const navItems = [
+    { path: "/", label: "routine" },
+    { path: "/todo", label: "todo" },
+    { path: "/about", label: "about us" },
+  ];
+  const [activeItem, setActiveItem] = useState("routine");
+
   return (
     <ul className="flex gap-6">
       {navItems.map((item) => (
-        <li
-          className={`group relative cursor-pointer select-none overflow-hidden rounded-full px-4 py-2 font-medium transition-all duration-300 hover:bg-[#fdf2f8] hover:shadow-sm ${
-            activeItem === item
-              ? "bg-[#fdf2f8] text-[#ec4899] shadow-sm"
-              : "text-gray-600 hover:text-[#ec4899]"
-          }`}
-          key={item}
-          onClick={() => setActiveItem(item)}
-        >
-          <span className="relative z-10 capitalize">{item}</span>
-          {/* <div className="absolute inset-0 -z-0 bg-gradient-to-r from-accent to-blue opacity-0 transition-opacity duration-300 group-hover:opacity-10" /> */}
-        </li>
+        <Link to={item.path}>
+          <li
+            className={`group relative cursor-pointer select-none overflow-hidden rounded-full px-4 py-2 font-medium transition-all duration-300 hover:bg-[#fdf2f8] hover:shadow-sm ${
+              activeItem === item.label
+                ? "bg-[#fdf2f8] text-[#ec4899] shadow-sm"
+                : "text-gray-600 hover:text-[#ec4899]"
+            }`}
+            key={item.label}
+            onClick={() => setActiveItem(item.label)}
+          >
+            <span className="relative z-10 capitalize">{item.label}</span>
+            {/* <div className="absolute inset-0 -z-0 bg-gradient-to-r from-accent to-blue opacity-0 transition-opacity duration-300 group-hover:opacity-10" /> */}
+          </li>
+        </Link>
       ))}
     </ul>
   );
