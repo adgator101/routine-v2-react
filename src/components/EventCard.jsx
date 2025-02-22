@@ -9,7 +9,7 @@ const EventCard = ({ title, daysLeft, location, image }) => {
         {[...Array(3)].map((_, index) => (
           <div
             key={index}
-            className="grid cursor-pointer gap-3 rounded-lg border border-gray-200 p-3 py-4 shadow-md transition-[shadow_transform] hover:scale-105 hover:shadow-md"
+            className="grid cursor-pointer gap-3 rounded-lg bg-white p-3 py-4 shadow-md transition-[shadow_transform] hover:scale-105 hover:shadow-md"
           >
             <div className="flex items-center gap-3">
               <img
