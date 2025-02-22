@@ -7,6 +7,10 @@ import { toast } from "react-hot-toast";
 import MainLayout from "./components/MainLayout";
 import ToDo from "./pages/ToDo";
 import AboutPage from "./pages/AboutPage";
+import Admin from "@/pages/Admin.jsx";
+import Dashboard from "@/components/admin/Dashboard.jsx";
+import Events from "@/components/admin/Events.jsx";
+import Users from "@/components/admin/Users.jsx";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -86,6 +90,12 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/todo" element={<ToDo />} />
           <Route path="/about" element={<AboutPage />} />
+        </Route>
+        <Route path="/admin" element={<Admin />}>
+          <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="users" element={<Users />} />
+          <Route path="events" element={<Events />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
