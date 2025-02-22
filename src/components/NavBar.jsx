@@ -14,7 +14,7 @@ const NavItem = () => {
   return (
     <ul className="flex gap-6">
       {navItems.map((item) => (
-        <Link to={item.path}>
+        <Link to={item.path} key={item.label}>
           <li
             className={`group relative cursor-pointer select-none overflow-hidden rounded-full px-4 py-2 font-medium transition-all duration-300 hover:bg-[#fdf2f8] hover:shadow-sm ${
               activeItem === item.label

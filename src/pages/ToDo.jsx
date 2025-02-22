@@ -14,7 +14,14 @@ const ToDo = () => {
     setTodoList(tasks);
     localStorage.setItem("tasks", JSON.stringify(tasks));
   };
+  const handleComplete = (index) => {
+    const updatedTodoList = todoList.map((item, i) =>
+      i === index ? { ...item, status: !item.status } : item,
+    );
 
+    setTodoList(updatedTodoList);
+    localStorage.setItem("tasks", JSON.stringify(todoList));
+  };
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem("tasks"));
     if (todos) {
@@ -66,7 +73,7 @@ const ToDo = () => {
             >
               <TodoCard
                 key={index}
-                handleComplete={() => handleRemove(index)}
+                handleComplete={() => handleComplete(index)}
                 handleRemove={() => handleRemove(index)}
                 todoItem={todoItem}
               />
