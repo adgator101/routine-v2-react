@@ -6,6 +6,7 @@ import DateButton from "@/components/DateButton";
 import RoutineCard from "@/components/RoutineCard";
 import EventCard from "@/components/EventCard";
 import Assignment from "@/components/Assignment";
+import {Calendar} from "@/components/ui/calendar.jsx"
 
 const Home = () => {
   const [todayRoutine, setTodayRoutine] = React.useState([]);
@@ -52,7 +53,9 @@ const Home = () => {
           {!user && <Onboarding setUserGroup={handleUserGroup} />}
         </div>
         <div className="space-y-10">
-          <div className="h-48 w-full rounded-lg border-2">Calendar</div>
+          <div className="h-48 w-full rounded-lg border-2">
+            <Calendar mode="single" selected={"2025-01-10"} />
+          </div>
           <Assignment />
         </div>
       </div>

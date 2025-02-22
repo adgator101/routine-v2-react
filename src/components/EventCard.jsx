@@ -1,14 +1,15 @@
 import { MapPin } from "lucide-react";
 import React from "react";
+
 const EventCard = ({ title, daysLeft, location, image }) => {
   return (
     <>
       <p className="font-poppins text-2xl font-semibold">Upcoming Events</p>
-      <div className="my-5 grid gap-3 font-manrope sm:flex flex-wrap">
+      <div className="my-5 grid grid-cols-1 gap-3 font-manrope sm:grid-cols-2 md:grid-cols-3 md:gap-6">
         {[...Array(3)].map((_, index) => (
           <div
             key={index}
-            className="grid gap-3 rounded-lg p-3 shadow-sm transition-[shadow_transform] hover:shadow-md hover:scale-105 cursor-pointer"
+            className="grid cursor-pointer gap-3 rounded-lg border border-gray-200 p-3 py-4 shadow-md transition-[shadow_transform] hover:scale-105 hover:shadow-md"
           >
             <div className="flex items-center gap-3">
               <img
@@ -16,10 +17,13 @@ const EventCard = ({ title, daysLeft, location, image }) => {
                 alt="pic"
                 className="h-10 w-10 rounded-full"
               />
-              <div className="grid">
-                <p className="text-lg font-bold">Cyber Security 101</p>
-                <p>
-                  <span className="font-semibold text-[#db2778]">16D </span>left
+              <div className="flex flex-col gap-2">
+                <p className="text-md font-bold">Cyber Security 101</p>
+                <p className="text-sm">
+                  <span className="text-md font-semibold text-[#db2778]">
+                    16D{" "}
+                  </span>
+                  left
                 </p>
               </div>
             </div>
