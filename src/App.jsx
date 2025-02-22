@@ -11,6 +11,7 @@ import Admin from "@/pages/Admin.jsx";
 import Dashboard from "@/components/admin/Dashboard.jsx";
 import Events from "@/components/admin/Events.jsx";
 import Users from "@/components/admin/Users.jsx";
+import Login from "./pages/Login";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -84,7 +85,7 @@ const App = () => {
   return (
     <>
       <Routes>
-        {/* <Route path="/login" element={<Login />}></Route> */}
+        <Route path="/login" element={<Login />}></Route>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
