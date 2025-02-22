@@ -14,7 +14,7 @@ const NavItem = () => {
   return (
     <ul className="flex gap-6">
       {navItems.map((item) => (
-        <Link to={item.path}>
+        <Link to={item.path} key={item.label}>
           <li
             className={`group relative cursor-pointer select-none overflow-hidden rounded-full px-4 py-2 font-medium transition-all duration-300 hover:bg-[#fdf2f8] hover:shadow-sm ${
               activeItem === item.label
@@ -92,8 +92,8 @@ const NavBar = ({ activeItem, setActiveItem }) => {
   };
 
   return (
-    <nav className="relative border-b border-gray-100 font-poppins shadow-sm">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 p-4 md:px-6">
+    <nav className="relative border-b border-gray-100 font-poppins">
+      <div className="flex items-center justify-between gap-4 py-4">
         {/* Left - User Details */}
         <div className="flex items-center gap-4">
           <div className="group relative h-12 w-12 overflow-hidden rounded-full transition-transform duration-300 hover:scale-105">
