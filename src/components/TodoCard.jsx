@@ -38,10 +38,10 @@ const TodoCard = ({todoItem, handleComplete, handleRemove}) => {
                 <div className="flex items-start gap-6">
                     <div className="relative shrink-0">
                         <div className="w-20 h-20 rounded-xl overflow-hidden">
-                            <img 
-                                src="/api/placeholder/400/400"
-                                alt="Task thumbnail" 
-                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" 
+                            <img
+                                src="https://placehold.co/400"
+                                alt="Task thumbnail"
+                                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                             />
                         </div>
                     </div>
@@ -53,13 +53,13 @@ const TodoCard = ({todoItem, handleComplete, handleRemove}) => {
                             </h2>
                             <div className="flex items-center gap-2 shrink-0">
                                 <button
-                                    onClick={handleRemove} 
+                                    onClick={handleRemove}
                                     className="p-2 rounded-lg transition-all duration-200 hover:bg-red-50 hover:scale-105"
                                     aria-label="Delete task"
                                 >
                                     <Trash className="w-5 h-5 text-gray-400 hover:text-red-500" />
                                 </button>
-                                <button 
+                                <button
                                     onClick={handleComplete}
                                     className="p-2 rounded-lg transition-all duration-200 hover:bg-green-50 hover:scale-105"
                                     aria-label="Complete task"
@@ -79,7 +79,7 @@ const TodoCard = ({todoItem, handleComplete, handleRemove}) => {
                                 <span>{formatDate(todoItem.dueDate)}</span>
                             </div>
                             <div className="h-4 w-px bg-gray-200" />
-                            <Badge 
+                            <Badge
                                 className={`
                                     px-2 py-1 text-xs font-medium capitalize transition-colors duration-300
                                     ${getPriorityConfig(todoItem.priority).colors}
@@ -87,6 +87,14 @@ const TodoCard = ({todoItem, handleComplete, handleRemove}) => {
                                 `}
                             >
                                 {todoItem.priority}
+                            </Badge><Badge
+                                className={`
+                                    px-2 py-1 text-xs font-medium capitalize transition-colors duration-300
+                                    ${getPriorityConfig(todoItem.priority).colors}
+                                    ${getPriorityConfig(todoItem.priority).hoverColors}
+                                `}
+                            >
+                                {todoItem.status? "Completed": "Incomplete"}
                             </Badge>
                         </div>
                     </div>
