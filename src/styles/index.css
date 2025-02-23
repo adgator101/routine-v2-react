@@ -7,7 +7,7 @@ body, html, #root{
     min-height: 100vh;
 }
 #root{
-  @apply bg-[#f7f7f7]
+  @apply bg-[rgb(249_250_251)]
 }
 @layer utilities {
     /* Layout */

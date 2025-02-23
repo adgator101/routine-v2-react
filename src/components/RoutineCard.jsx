@@ -6,7 +6,7 @@ const RoutineCard = ({ data }) => {
 
   return (
     <div className="flex w-full font-manrope">
-      <div className="group relative my-3 flex min-h-[80px] w-full cursor-pointer items-center justify-between rounded-lg border border-t bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 sm:my-4 sm:min-h-[90px] sm:px-5 lg:max-w-4xl">
+      <div className="group relative my-3 flex min-h-[80px] w-full cursor-pointer items-center justify-between rounded-lg border border-t bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 sm:my-4 sm:min-h-[90px] sm:px-5">
         <div className="absolute left-0 top-0 h-full w-1 rounded-l-lg bg-accent/80" />
 
         <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-accent/5 to-blue/5 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />

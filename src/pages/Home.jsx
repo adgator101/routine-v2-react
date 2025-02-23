@@ -42,11 +42,11 @@ const Home = () => {
     );
   };
   return (
-    <div className="flex flex-wrap px-4 pb-16 md:px-0 md:pb-0 lg:flex-col lg:gap-6">
-      <div className="event-card w-full ">
+    <div className="flex flex-wrap px-4 pb-20 md:pb-4 lg:flex-col lg:gap-6">
+      <div className="event-card w-full">
         <EventCard />
       </div>
-      <div className="grid gap-20 lg:grid-cols-[1.5fr_1fr] lg:gap-10">
+      <div className="grid gap-20 lg:grid-cols-[2fr_1fr] lg:gap-10">
         <div>
           <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
           {todayRoutine.length > 0 ? (
@@ -58,8 +58,8 @@ const Home = () => {
           )}
           {!user && <Onboarding setUserGroup={handleUserGroup} />}
         </div>
-        <div className="space-y-10">
-          <div className="h-fit w-fit rounded-lg border-2 p-4 lg:mx-10">
+        <div className="space-y-10 lg:justify-self-end">
+          <div className="h-fit w-fit lg:w-full rounded-lg border px-6 py-4 bg-white">
             <DayPicker
               mode="single"
               selected={null}
@@ -73,7 +73,9 @@ const Home = () => {
               }}
             />
           </div>
-          <Assignment />
+          <div className="assignment-container bg-white px-6 py-6 border rounded-lg h-fit w-full">
+            <Assignment />
+          </div>
         </div>
       </div>
     </div>
