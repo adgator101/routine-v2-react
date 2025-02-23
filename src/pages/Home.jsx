@@ -58,9 +58,10 @@ const Home = () => {
           )}
           {!user && <Onboarding setUserGroup={handleUserGroup} />}
         </div>
-        <div className="space-y-10 lg:justify-self-end">
-          <div className="h-fit w-fit rounded-lg border px-6 py-4 dark:border-dark-border dark:bg-dark-card lg:w-full">
+        <div className="space-y-10">
+          <div className="h-fit w-full rounded-lg border px-6 py-4 dark:border-dark-border dark:bg-dark-card">
             <DayPicker
+              className="justify-items-center py-10 font-manrope lg:scale-105"
               mode="single"
               selected={null}
               modifiers={{ marked: markedDates }}
@@ -73,7 +74,7 @@ const Home = () => {
               }}
             />
           </div>
-          <div className="assignment-container h-fit w-full rounded-lg border px-6 py-6 dark:border-dark-border dark:bg-dark-card">
+          <div className="assignment-container h-fit w-full rounded-lg border bg-white p-6 dark:border-dark-border dark:bg-dark-card">
             <Assignment />
           </div>
         </div>

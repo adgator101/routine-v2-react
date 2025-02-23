@@ -5,10 +5,10 @@ import NavBar from "./NavBar";
 const MainLayout = () => {
   return (
     <>
-      <header className="dark:bg-dark-card dark:border-dark-border border-b-2">
+      <header className="border-b-2 dark:border-dark-border dark:bg-dark-card">
         <NavBar />
       </header>
-      <div className="lg:max-w-8xl mt-6 lg:mx-auto">
+      <div className="mt-10 lg:mx-auto lg:max-w-8xl">
         <Outlet />
       </div>
     </>
