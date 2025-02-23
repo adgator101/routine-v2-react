@@ -6,8 +6,14 @@ import DateButton from "@/components/DateButton";
 import RoutineCard from "@/components/RoutineCard";
 import EventCard from "@/components/EventCard";
 import Assignment from "@/components/Assignment";
-import { Calendar } from "@/components/ui/calendar.jsx";
+import { DayPicker } from "react-day-picker";
+import "react-day-picker/dist/style.css";
 
+const markedDates = [
+  new Date(2025, 1, 23),
+  new Date(2025, 2, 15),
+  new Date(2025, 2, 20),
+];
 const Home = () => {
   const [todayRoutine, setTodayRoutine] = React.useState([]);
   const [selectedDay, setSelectedDay] = React.useState();
@@ -36,8 +42,8 @@ const Home = () => {
     );
   };
   return (
-    <div className="flex pb-16 md:pb-0 lg:flex-col lg:gap-6">
-      <div className="event-card">
+    <div className="flex flex-wrap px-4 pb-16 md:px-0 md:pb-0 lg:flex-col lg:gap-6">
+      <div className="event-card w-full ">
         <EventCard />
       </div>
       <div className="grid gap-20 lg:grid-cols-[1.5fr_1fr] lg:gap-10">
@@ -53,8 +59,19 @@ const Home = () => {
           {!user && <Onboarding setUserGroup={handleUserGroup} />}
         </div>
         <div className="space-y-10">
-          <div className="h-fit w-full rounded-lg border-2">
-            <Calendar mode="single" selected={"2025-01-10"} />
+          <div className="h-fit w-fit rounded-lg border-2 p-4 lg:mx-10">
+            <DayPicker
+              mode="single"
+              selected={null}
+              modifiers={{ marked: markedDates }}
+              modifiersStyles={{
+                marked: {
+                  backgroundColor: "#ffeb3b",
+                  borderRadius: "50%",
+                  color: "#000",
+                },
+              }}
+            />
           </div>
           <Assignment />
         </div>

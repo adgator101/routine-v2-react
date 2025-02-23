@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import Notification from "./Notification";
 import { Link } from "react-router-dom";
 
+const navItems = [
+  { icon: <House />, path: "/", label: "routine" },
+  { icon: <ListCheck />, path: "/todo", label: "todo" },
+  { icon: <User />, path: "/about", label: "about us" },
+];
 const NavItem = () => {
-  const navItems = [
-    { path: "/", label: "routine" },
-    { path: "/todo", label: "todo" },
-    { path: "/about", label: "about us" },
-  ];
   const [activeItem, setActiveItem] = useState("routine");
 
   return (
@@ -35,12 +35,6 @@ const NavItem = () => {
 
 // NavItemMobile Component for Mobile Navigation
 const NavItemMobile = ({ activeItem, setActiveItem }) => {
-  const navItems = [
-    { icon: <House />, label: "routine" },
-    { icon: <ListCheck />, label: "todo" },
-    { icon: <User />, label: "about us" },
-  ];
-
   return (
     <div className="fixed bottom-6 z-10 w-full px-4">
       <div className="mx-auto w-full max-w-md rounded-2xl bg-white/80 p-2 shadow-lg backdrop-blur-lg">
@@ -48,20 +42,21 @@ const NavItemMobile = ({ activeItem, setActiveItem }) => {
           {navItems.map((item) => {
             const isActive = activeItem === item.label;
             return (
-              <li
-                key={item.label}
-                onClick={() => setActiveItem(item.label)}
-                className={`group relative cursor-pointer rounded-xl p-3 transition-all duration-300 ${isActive ? "bg-accent/10" : "hover:bg-gray-50"}`}
-              >
-                <div className="flex flex-col items-center gap-1">
-                  {React.cloneElement(item.icon, {
-                    size: 20,
-                    color: isActive ? "#F84178" : "#252539",
-                    className:
-                      "transition-transform duration-300 group-hover:scale-110",
-                  })}
-                </div>
-              </li>
+              <Link to={item.path} key={item.label}>
+                <li
+                  onClick={() => setActiveItem(item.label)}
+                  className={`group relative cursor-pointer rounded-xl p-3 transition-all duration-300 ${isActive ? "bg-accent/10" : "hover:bg-gray-50"}`}
+                >
+                  <div className="flex flex-col items-center gap-1">
+                    {React.cloneElement(item.icon, {
+                      size: 20,
+                      color: isActive ? "#F84178" : "#252539",
+                      className:
+                        "transition-transform duration-300 group-hover:scale-110",
+                    })}
+                  </div>
+                </li>
+              </Link>
             );
           })}
         </ul>
@@ -92,7 +87,7 @@ const NavBar = ({ activeItem, setActiveItem }) => {
   };
 
   return (
-    <nav className="relative border-b border-gray-100 font-poppins">
+    <nav className="lg:max-w-8xl relative border-b border-gray-100 font-poppins lg:mx-auto">
       <div className="flex items-center justify-between gap-4 py-4">
         {/* Left - User Details */}
         <div className="flex items-center gap-4">

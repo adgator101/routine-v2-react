@@ -15,6 +15,9 @@ export default {
   			'card-2': '#DDD4FB',
   			'card-3': '#BEF0C7'
   		},
+			maxWidth:{
+				'8xl': '1560px'
+			},
   		spacing: {
   			'128': '32rem',
   			'144': '36rem'
