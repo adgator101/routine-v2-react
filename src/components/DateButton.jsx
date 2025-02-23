@@ -20,9 +20,9 @@ const DateButton = ({ handleSelect, selectedDay }) => {
           <button
             key={index}
             onClick={() => handleSelect(day)}
-            className={`flex w-28 flex-col items-center rounded-xl border-none px-3 py-2 text-xs transition-all duration-200 lg:px-9 lg:py-3 ${
+            className={`flex w-28 flex-col items-center rounded-xl px-3 py-2 text-xs shadow-sm transition-all duration-200 lg:px-9 lg:py-3 ${
               isSelected
-                ? "scale-105 bg-[#ec4899] text-white shadow-md"
+                ? "scale-105 bg-[#ec4899] text-white hover:shadow-none"
                 : "bg-white dark:bg-gray-900"
             } hover:scale-105 hover:shadow-md ${!isSelected && "hover:bg-gray-50 dark:hover:bg-gray-800"} border border-gray-200`}
           >

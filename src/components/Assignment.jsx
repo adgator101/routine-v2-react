@@ -8,7 +8,7 @@ const Assignment = () => {
       {[...Array(3)].map((_, index) => (
         <div
           key={index}
-          className="my-3 cursor-pointer space-y-5 rounded-lg p-3 font-manrope shadow-sm transition-[shadow_transform] hover:-translate-y-1 hover:shadow-md"
+          className="my-3 cursor-pointer space-y-5 rounded-lg p-3 font-manrope shadow-sm transition-[shadow_transform] hover:-translate-y-1 hover:shadow-md border"
         >
           <div className="flex gap-3">
             <Star className="text-yellow-500" />
