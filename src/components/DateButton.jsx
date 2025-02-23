@@ -12,7 +12,7 @@ const DateButton = ({ handleSelect, selectedDay }) => {
   });
 
   return (
-    <div className="date-buttons flex flex-wrap justify-center gap-4 rounded-lg border border-gray-200 bg-white px-4 py-4 font-manrope md:mb-4 lg:gap-6">
+    <div className="date-buttons flex flex-wrap justify-evenly gap-4 rounded-lg border border-gray-200 bg-white px-4 py-4 font-manrope md:mb-4 lg:gap-6">
       {daysOfWeek.map((day, index) => {
         const isSelected = selectedDay === day;
 

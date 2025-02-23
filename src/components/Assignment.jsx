@@ -3,7 +3,7 @@ import React from "react";
 
 const Assignment = () => {
   return (
-    <div>
+    <>
       <p className="font-poppins text-xl font-semibold">Upcoming Assignments</p>
       {[...Array(3)].map((_, index) => (
         <div
@@ -24,7 +24,7 @@ const Assignment = () => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

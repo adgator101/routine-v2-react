@@ -5,11 +5,11 @@ const EventCard = ({ title, daysLeft, location, image }) => {
   return (
     <>
       <p className="font-poppins text-2xl font-semibold">Upcoming Events</p>
-      <div className="my-5 grid grid-cols-1 gap-3 font-manrope sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+      <div className="my-5 flex flex-wrap lg:justify-stretch gap-3 font-manrope md:gap-6 lg:gap-3">
         {[...Array(3)].map((_, index) => (
           <div
             key={index}
-            className="grid cursor-pointer gap-3 rounded-lg bg-white p-3 py-4 shadow-md transition-[shadow_transform] hover:scale-105 hover:shadow-md"
+            className="grid w-96 cursor-pointer gap-3 rounded-lg bg-white p-4 shadow-sm transition-[shadow_transform] hover:scale-105 hover:shadow-md lg:w-[30%] border"
           >
             <div className="flex items-center gap-3">
               <img
@@ -20,7 +20,7 @@ const EventCard = ({ title, daysLeft, location, image }) => {
               <div className="flex flex-col gap-2">
                 <p className="text-md font-bold">Cyber Security 101</p>
                 <p className="text-sm">
-                  <span className="text-md font-semibold text-[#db2778]">
+                  <span className="text-md font-poppins font-bold text-[#db2778]">
                     16D{" "}
                   </span>
                   left
