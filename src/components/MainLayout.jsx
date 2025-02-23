@@ -4,12 +4,14 @@ import NavBar from "./NavBar";
 
 const MainLayout = () => {
   return (
-    <div className="lg:px-48 mx-auto">
-      <NavBar />
-      <div className="mt-6 py-6">
+    <>
+      <header className="bg-white border-b-2 border-gray-100">
+        <NavBar />
+      </header>
+      <div className="lg:max-w-8xl mt-6 lg:mx-auto">
         <Outlet />
       </div>
-    </div>
+    </>
   );
 };
 
