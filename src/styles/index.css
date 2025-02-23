@@ -2,11 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html, #root{
+body, html, #root,.routine-wrapper{
   width: 100%;
     min-height: 100vh;
 }
-#root{
+.routine-wrapper{
   @apply bg-[rgb(249_250_251)]
 }
 @layer utilities {

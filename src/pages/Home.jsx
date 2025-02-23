@@ -59,7 +59,7 @@ const Home = () => {
           {!user && <Onboarding setUserGroup={handleUserGroup} />}
         </div>
         <div className="space-y-10 lg:justify-self-end">
-          <div className="h-fit w-fit lg:w-full rounded-lg border px-6 py-4 bg-white">
+          <div className="h-fit w-fit rounded-lg border px-6 py-4 dark:border-dark-border dark:bg-dark-card lg:w-full">
             <DayPicker
               mode="single"
               selected={null}
@@ -73,7 +73,7 @@ const Home = () => {
               }}
             />
           </div>
-          <div className="assignment-container bg-white px-6 py-6 border rounded-lg h-fit w-full">
+          <div className="assignment-container h-fit w-full rounded-lg border px-6 py-6 dark:border-dark-border dark:bg-dark-card">
             <Assignment />
           </div>
         </div>

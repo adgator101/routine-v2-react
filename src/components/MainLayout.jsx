@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 const MainLayout = () => {
   return (
     <>
-      <header className="bg-white border-b-2 border-gray-100">
+      <header className="dark:bg-dark-card dark:border-dark-border border-b-2">
         <NavBar />
       </header>
       <div className="lg:max-w-8xl mt-6 lg:mx-auto">

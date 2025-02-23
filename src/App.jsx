@@ -83,7 +83,7 @@ const App = () => {
   }, [isIOS]);
 
   return (
-    <>
+    <div className="routine-wrapper dark:bg-dark dark:text-white">
       <Routes>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/" element={<MainLayout />}>
@@ -100,7 +100,7 @@ const App = () => {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </>
+    </div>
   );
 };
 
