@@ -19,7 +19,7 @@ const NavItem = () => {
             className={`group relative cursor-pointer select-none overflow-hidden rounded-full px-4 py-2 font-medium transition-all duration-300 hover:bg-[#fdf2f8] hover:shadow-sm ${
               activeItem === item.label
                 ? "bg-[#fdf2f8] text-[#ec4899] shadow-sm"
-                : "text-gray-600 hover:text-[#ec4899]"
+                : "hover:text-[#ec4899]"
             }`}
             key={item.label}
             onClick={() => setActiveItem(item.label)}
@@ -85,9 +85,12 @@ const NavBar = ({ activeItem, setActiveItem }) => {
   const toggleNotifications = () => {
     setShowNotifications((prevState) => !prevState);
   };
-
+  const handleDarkMode = () => {
+    setisLight(!isLight);
+    document.body.classList.toggle("dark");
+  };
   return (
-    <nav className="lg:max-w-8xl relative border-b border-gray-100 font-poppins lg:mx-auto">
+    <nav className="relative font-poppins lg:mx-auto lg:max-w-8xl">
       <div className="flex items-center justify-between gap-4 p-4">
         {/* Left - User Details */}
         <div className="flex items-center gap-4">
@@ -96,10 +99,8 @@ const NavBar = ({ activeItem, setActiveItem }) => {
             <div className="absolute inset-0 rounded-full shadow-sm transition-shadow duration-300 group-hover:shadow-md" />
           </div>
           <div className="space-y-0.5">
-            <div className="font-semibold text-dark">
-              Hi, {user?.name || "Student"}
-            </div>
-            <div className="text-sm text-dark/70">
+            <div className="font-semibold">Hi, {user?.name || "Student"}</div>
+            <div className="text-sm">
               {user?.program || "Computer Science"}, {user || "L4CG3"}
             </div>
           </div>
@@ -109,11 +110,11 @@ const NavBar = ({ activeItem, setActiveItem }) => {
         <div className="flex-center gap-3 md:gap-7">
           {/* Light/Dark Mode */}
           <button
-            onClick={() => setisLight(!isLight)}
+            onClick={handleDarkMode}
             className="rounded-full p-1.5 transition-all duration-300 active:bg-gray-200"
           >
             <div
-              className={`text-gray-600 transition-transform duration-500 ${isLight ? "rotate-180" : "rotate-0"}`}
+              className={`transition-transform duration-500 ${isLight ? "rotate-180" : "rotate-0"}`}
             >
               {isLight ? <Sun size={28} /> : <Moon size={28} />}
             </div>

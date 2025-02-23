@@ -10,7 +10,10 @@ export default {
   		colors: {
   			accent: '#F84178',
   			blue: '#0067FF',
-  			dark: '#252539',
+  			// dark: '#252539',
+				dark: 'rgb(17, 24, 39)',
+				'dark-border':'rgb(55,65,81)',
+				'dark-card': '#1f2937',
   			'card-1': '#FFDAA7',
   			'card-2': '#DDD4FB',
   			'card-3': '#BEF0C7'
@@ -55,7 +58,7 @@ export default {
 		fontSize:{
 			small: '8px'
 		}
-  	}
+  	},
   },
 //   plugins: [
 //     require('@tailwindcss/forms'),
