@@ -1,15 +1,29 @@
 import { MapPin } from "lucide-react";
 import React from "react";
+import Carousel from "./react-bits/Carousel";
 
 const EventCard = ({ title, daysLeft, location, image }) => {
   return (
     <>
       <p className="font-poppins text-2xl font-semibold">Upcoming Events</p>
       <div className="my-5 grid gap-3 font-manrope sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+        <div
+          style={{ height: "150px", position: "relative" }}
+          className="justify-items-center sm:hidden"
+        >
+          <Carousel
+            baseWidth={350}
+            autoplay={true}
+            autoplayDelay={3000}
+            pauseOnHover={true}
+            loop={true}
+            round={false}
+          />
+        </div>
         {[...Array(3)].map((_, index) => (
           <div
             key={index}
-            className="grid cursor-pointer gap-3 rounded-lg border p-4 shadow-sm transition-[shadow_transform] hover:scale-105 hover:shadow-md dark:border-dark-border dark:bg-dark-card"
+            className="hidden cursor-pointer gap-3 rounded-lg border p-4 shadow-sm transition-[shadow_transform] hover:scale-105 hover:shadow-md dark:border-dark-border dark:bg-dark-card sm:grid"
           >
             <div className="flex items-center gap-3">
               <img
