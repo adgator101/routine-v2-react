@@ -12,7 +12,7 @@ const DateButton = ({ handleSelect, selectedDay }) => {
   });
 
   return (
-    <div className="date-buttons flex flex-wrap justify-evenly gap-4 rounded-lg border border-gray-200 dark:bg-dark-card dark:border-dark-border px-4 py-4 font-manrope md:mb-4 lg:gap-6">
+    <div className="date-buttons my-4 flex flex-wrap justify-center gap-4 rounded-lg border border-gray-200 p-4 font-manrope dark:border-dark-border dark:bg-dark-card md:mb-4 lg:my-0 lg:gap-6 xl:justify-evenly">
       {daysOfWeek.map((day, index) => {
         const isSelected = selectedDay === day;
 
@@ -20,7 +20,7 @@ const DateButton = ({ handleSelect, selectedDay }) => {
           <button
             key={index}
             onClick={() => handleSelect(day)}
-            className={`flex w-28 flex-col items-center rounded-xl px-3 py-2 text-xs shadow-sm transition-all duration-200 lg:px-9 lg:py-3 ${
+            className={`flex w-16 flex-col items-center rounded-xl px-3 py-2 text-xs shadow-sm transition-all duration-200 sm:w-28 lg:px-9 lg:py-3 ${
               isSelected
                 ? "scale-105 bg-[#ec4899] text-white hover:shadow-none"
                 : "bg-white dark:bg-gray-900"

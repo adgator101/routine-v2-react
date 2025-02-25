@@ -46,7 +46,7 @@ const Home = () => {
       <div className="event-card w-full">
         <EventCard />
       </div>
-      <div className="grid gap-20 lg:grid-cols-[2fr_1fr] lg:gap-10">
+      <div className="grid w-full gap-20 lg:grid-cols-[2fr_1fr] lg:gap-10">
         <div>
           <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
           {todayRoutine.length > 0 ? (
