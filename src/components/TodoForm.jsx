@@ -16,16 +16,17 @@ const TodoForm = ({ onClose }) => {
             title: '',
             description: '',
             priority: 'medium',
-            dueDate: new Date() 
+            status: false,
+            dueDate: new Date()
         }
     });
 
     const onSubmit = (data) => {
         const taskData = {
             ...data,
-            dueDate: data.dueDate.getTime() 
+            dueDate: data.dueDate.getTime()
         };
-        
+
         const tasks = localStorage.getItem('tasks');
         if (tasks) {
             const taskList = JSON.parse(tasks);
@@ -43,8 +44,8 @@ const TodoForm = ({ onClose }) => {
         <Card className="w-full max-w-lg mx-auto">
             <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="text-xl font-bold">Add New Task</CardTitle>
-                <Button 
-                    variant="ghost" 
+                <Button
+                    variant="ghost"
                     size="icon"
                     onClick={onClose}
                     className="h-8 w-8 rounded-full"
@@ -63,9 +64,9 @@ const TodoForm = ({ onClose }) => {
                                 <FormItem>
                                     <FormLabel>Title</FormLabel>
                                     <FormControl>
-                                        <Input 
-                                            placeholder="Enter task title..." 
-                                            {...field} 
+                                        <Input
+                                            placeholder="Enter task title..."
+                                            {...field}
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -81,9 +82,9 @@ const TodoForm = ({ onClose }) => {
                                 <FormItem>
                                     <FormLabel>Description</FormLabel>
                                     <FormControl>
-                                        <Input 
-                                            placeholder="Enter task description..." 
-                                            {...field} 
+                                        <Input
+                                            placeholder="Enter task description..."
+                                            {...field}
                                         />
                                     </FormControl>
                                     <FormMessage />
@@ -135,7 +136,7 @@ const TodoForm = ({ onClose }) => {
                                             selected={field.value}
                                             onChange={field.onChange}
                                             showTimeSelect
-                                            dateFormat="Pp" 
+                                            dateFormat="Pp"
                                             className="w-full p-2 border rounded-md"
                                         />
                                     </FormControl>
@@ -145,15 +146,15 @@ const TodoForm = ({ onClose }) => {
                         />
 
                         <div className="flex gap-4 pt-4">
-                            <Button 
-                                type="submit" 
+                            <Button
+                                type="submit"
                                 className="flex-1 bg-accent hover:bg-pink-700"
                             >
                                 Add Task
                             </Button>
-                            <Button 
-                                type="button" 
-                                variant="outline" 
+                            <Button
+                                type="button"
+                                variant="outline"
                                 onClick={onClose}
                                 className="flex-1"
                             >
