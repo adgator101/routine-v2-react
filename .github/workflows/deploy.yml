@@ -19,4 +19,5 @@ jobs:
       - name: Run Docker Compose
         run: |  
           cd /home/devteam/frontend
-          docker compose up -d
+          git pull origin main
+          docker compose up -d --buid --remove-orphans
