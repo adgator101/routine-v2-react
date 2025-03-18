@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,16 @@ const Onboarding = ({ setUserGroup }) => {
   const handleNext = () => {
     setUserGroup(selectedGroup);
   };
+  useEffect(() => {
+    if (onBoardingVisible) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [onBoardingVisible]);
   return (
     <>
       {onBoardingVisible && (
