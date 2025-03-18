@@ -42,7 +42,7 @@ const Home = () => {
     );
   };
   return (
-    <div className="flex flex-wrap px-4 pb-20 md:pb-4 lg:flex-col lg:gap-6">
+    <div className="flex flex-wrap px-4 pb-24 md:pb-4 lg:flex-col lg:gap-6">
       <div className="event-card w-full">
         <EventCard />
       </div>
