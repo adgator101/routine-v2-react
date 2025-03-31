@@ -17,26 +17,29 @@ const Onboarding = ({ setUserGroup }) => {
   return (
     <>
       {onBoardingVisible && (
-        <div className="flex-center absolute inset-0 z-50 h-full flex-col items-center justify-center bg-black bg-opacity-65 p-6">
-          <div className="w-full max-w-md space-y-12 rounded-lg bg-white p-6 shadow-lg">
-            <h2 className="text-center text-2xl font-semibold">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm">
+          <div className="max-w-md transform overflow-hidden rounded-2xl bg-white p-8 shadow-2xl transition-all sm:w-full">
+            <h2 className="text-center text-2xl font-bold text-gray-900">
               Welcome to BIC Routine
             </h2>
-            <p className="text-center text-gray-600">
-              Please select an option to continue:
+            <p className="mt-3 text-center text-gray-600">
+              Please select your group to continue
             </p>
-            <div className="flex-center">
+
+            <div className="mt-8 flex justify-center">
               <DropdownMenu>
-                <DropdownMenuTrigger className="flex-between w-48 rounded-md border-2 px-4 py-2 text-gray-600 shadow-md">
-                  {selectedGroup || "Select Group"}
-                  <ChevronDown color="#9ca3af" />
+                <DropdownMenuTrigger className="flex w-64 items-center justify-between rounded-lg border border-gray-300 bg-white px-5 py-3 text-gray-700 shadow-sm hover:border-gray-400 focus:outline-none">
+                  <span className="font-medium">
+                    {selectedGroup || "Select Group"}
+                  </span>
+                  <ChevronDown size={18} />
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-48">
+                <DropdownMenuContent className="w-64 rounded-md p-1">
                   {groupNames.map((group) => (
                     <DropdownMenuItem
                       key={group}
                       onClick={() => setSelectedGroup(group)}
-                      className="flex cursor-pointer justify-center px-4 py-2 text-gray-600"
+                      className="cursor-pointer rounded-md px-4 py-2 text-gray-700 hover:bg-accent/10 hover:text-accent"
                     >
                       {group}
                     </DropdownMenuItem>
@@ -44,16 +47,17 @@ const Onboarding = ({ setUserGroup }) => {
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <div className="flex-center">
+
+            <div className="mt-10">
               <button
                 disabled={!selectedGroup}
                 onClick={() => {
                   handleNext();
                   setonBoardingVisible(false);
                 }}
-                className="hover:bg-blue-700 w-full rounded-md bg-accent px-6 py-3 font-semibold text-white shadow-lg transition duration-300 hover:bg-pink-700 disabled:cursor-not-allowed"
+                className="w-full rounded-lg bg-accent px-6 py-3.5 font-semibold text-white shadow-md transition-all duration-200 hover:bg-accent/90 focus:outline-none focus:ring-2 focus:ring-accent/50 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-500"
               >
-                Next
+                Continue to Dashboard
               </button>
             </div>
           </div>
