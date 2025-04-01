@@ -2,15 +2,16 @@ import { Bell, House, ListCheck, Moon, Sun, User } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import Notification from "./Notification";
 import { Link } from "react-router-dom";
+import NavItemMobile from "@/components/NavItemMobile.jsx";
+import LogOutButton from "@/components/LogOutButton.jsx";
 
 const navItems = [
   { icon: <House />, path: "/", label: "routine" },
   { icon: <ListCheck />, path: "/todo", label: "todo" },
   { icon: <User />, path: "/about", label: "about us" },
 ];
-const NavItem = () => {
-  const [activeItem, setActiveItem] = useState("routine");
 
+const NavItem = ({ activeItem, setActiveItem }) => {
   return (
     <ul className="flex gap-6">
       {navItems.map((item) => (
@@ -33,44 +34,12 @@ const NavItem = () => {
   );
 };
 
-// NavItemMobile Component for Mobile Navigation
-const NavItemMobile = ({ activeItem, setActiveItem }) => {
-  return (
-    <div className="fixed bottom-6 z-10 w-full px-4">
-      <div className="mx-auto w-full max-w-md rounded-2xl bg-white/80 p-2 shadow-lg backdrop-blur-lg dark:bg-dark">
-        <ul className="flex items-center justify-around">
-          {navItems.map((item) => {
-            const isActive = activeItem === item.label;
-            return (
-              <Link to={item.path} key={item.label}>
-                <li
-                  onClick={() => setActiveItem(item.label)}
-                  className={`group relative cursor-pointer rounded-xl p-3 transition-all duration-300 ${isActive && "bg-accent/10"}`}
-                >
-                  <div className="flex flex-col items-center gap-1">
-                    {React.cloneElement(item.icon, {
-                      size: 20,
-                      // color: isActive ? "#F84178" : "#252539",
-                      className:
-                        "transition-transform duration-300 group-hover:scale-110 text-[#252539] dark:text-white",
-                    })}
-                  </div>
-                </li>
-              </Link>
-            );
-          })}
-        </ul>
-      </div>
-    </div>
-  );
-};
-
-const NavBar = ({ activeItem, setActiveItem }) => {
+const NavBar = ({ handleLogout }) => {
+  const [activeItem, setActiveItem] = useState("routine");
   const [isLight, setisLight] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [showNotifications, setShowNotifications] = useState(false);
   const [user, setUser] = useState(null);
-
   useEffect(() => {
     const userFromStorage = localStorage.getItem("user");
     setUser(userFromStorage);
@@ -130,6 +99,7 @@ const NavBar = ({ activeItem, setActiveItem }) => {
             )}
           </div>
           {/* Right - Notifications */}
+          <LogOutButton handleLogout={handleLogout} />
           <button
             className="group relative rounded-full bg-card-1/50 p-3 transition-all duration-300 hover:scale-105 hover:bg-card-1 hover:shadow-md active:scale-95"
             aria-label="Notifications"
@@ -155,6 +125,7 @@ const NavBar = ({ activeItem, setActiveItem }) => {
           <NavItemMobile
             activeItem={activeItem}
             setActiveItem={setActiveItem}
+            navItems={navItems}
           />
         </div>
       )}
