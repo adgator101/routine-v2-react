@@ -8,6 +8,7 @@ import EventCard from "@/components/EventCard";
 import Assignment from "@/components/Assignment";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { useUserGroup } from "@/context/UserGroupContext.jsx";
 
 const markedDates = [
   new Date(2025, 1, 23),
@@ -15,19 +16,15 @@ const markedDates = [
   new Date(2025, 2, 20),
 ];
 const Home = () => {
+  const { userGroup } = useUserGroup();
   const [todayRoutine, setTodayRoutine] = React.useState([]);
   const [selectedDay, setSelectedDay] = React.useState();
-  const [userGroup, setUserGroup] = React.useState("");
-  const handleUserGroup = (group) => {
-    localStorage.setItem("user", group);
-    setUserGroup(group);
-  };
-  const user = localStorage.getItem("user");
+
   React.useEffect(() => {
     const dayName = getTodayDay();
     handleSelect(dayName);
     const groupNumber = localStorage.getItem("user");
-    setUserGroup(groupNumber);
+    // setUserGroup(groupNumber);
     setTodayRoutine(handleFilterRoutine(dayName, groupNumber));
   }, [userGroup]);
 
@@ -42,44 +39,45 @@ const Home = () => {
     );
   };
   return (
-    <div className="flex flex-wrap px-4 pb-20 md:pb-4 lg:flex-col lg:gap-6">
-      <div className="event-card w-full">
-        <EventCard />
-      </div>
-      <div className="grid w-full gap-20 lg:grid-cols-[2fr_1fr] lg:gap-10">
-        <div>
-          <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
-          {todayRoutine.length > 0 ? (
-            todayRoutine.map((routine, index) => (
-              <RoutineCard key={index} data={routine} />
-            ))
-          ) : (
-            <div>No classes found for the selected day.</div>
-          )}
-          {!user && <Onboarding setUserGroup={handleUserGroup} />}
+    <>
+      <div className="flex flex-wrap px-4 pb-20 md:pb-4 lg:flex-col lg:gap-6">
+        <div className="event-card w-full">
+          <EventCard />
         </div>
-        <div className="space-y-10">
-          <div className="h-fit w-full rounded-lg border px-6 py-4 dark:border-dark-border dark:bg-dark-card">
-            <DayPicker
-              className="justify-items-center py-10 font-manrope lg:scale-105"
-              mode="single"
-              selected={null}
-              modifiers={{ marked: markedDates }}
-              modifiersStyles={{
-                marked: {
-                  backgroundColor: "#ffeb3b",
-                  borderRadius: "50%",
-                  color: "#000",
-                },
-              }}
-            />
+        <div className="grid w-full gap-20 lg:grid-cols-[2fr_1fr] lg:gap-10">
+          <div>
+            <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
+            {todayRoutine.length > 0 ? (
+              todayRoutine.map((routine, index) => (
+                <RoutineCard key={index} data={routine} />
+              ))
+            ) : (
+              <div>No classes found for the selected day.</div>
+            )}
           </div>
-          <div className="assignment-container h-fit w-full rounded-lg border bg-white p-6 dark:border-dark-border dark:bg-dark-card">
-            <Assignment />
+          <div className="space-y-10">
+            <div className="h-fit w-full rounded-lg border px-6 py-4 dark:border-dark-border dark:bg-dark-card">
+              <DayPicker
+                className="justify-items-center py-10 font-manrope lg:scale-105"
+                mode="single"
+                selected={null}
+                modifiers={{ marked: markedDates }}
+                modifiersStyles={{
+                  marked: {
+                    backgroundColor: "#ffeb3b",
+                    borderRadius: "50%",
+                    color: "#000",
+                  },
+                }}
+              />
+            </div>
+            <div className="assignment-container h-fit w-full rounded-lg border bg-white p-6 dark:border-dark-border dark:bg-dark-card">
+              <Assignment />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
