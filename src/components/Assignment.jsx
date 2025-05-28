@@ -8,10 +8,10 @@ const Assignment = () => {
       {[...Array(2)].map((_, index) => (
         <div
           key={index}
-          className="my-5 cursor-pointer rounded-lg border px-3 py-4 font-manrope shadow-sm transition-[shadow_transform] hover:-translate-y-1 hover:shadow-md dark:border-dark-border"
+          className="my-5 cursor-pointer rounded-lg px-3 py-4 font-manrope transition-[shadow_transform] hover:-translate-y-1 dark:border-dark-border group shadow-[0_2px_8px_rgba(0,_0,_0,_0.1)] hover:shadow-[0_4px_16px_rgba(0,_0,_0,_0.1)]"
         >
           <div className="flex gap-3">
-            <Star className="text-yellow-500" />
+            <Star className="text-yellow-500 group-hover:animate-spin" />
             <div className="space-y-1">
               <p className="font-semibold">Coursework</p>
               <p className="text-sm">4CS020/ML1: Interactive 3D Application</p>

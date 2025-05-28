@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   AlarmClock,
   ClipboardList,
@@ -108,11 +108,17 @@ const ClassDetailModal = ({ data, onModalClose }) => {
 
   console.log(data);
 
-  
+  const [rotateFront, setrotateFront] = useState(false);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setrotateFront((prev) => !prev);
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="flex items-center justify-center p-3 font-poppins py-6">
-      <div className="relative cursor-default space-y-10 rounded-2xl bg-white p-10 shadow-lg min-w-[420px] max-w-[580px]">
+    <div className="flex items-center justify-center p-3 py-6 font-poppins">
+      <div className="relative min-w-[420px] max-w-[580px] cursor-default space-y-10 rounded-2xl bg-white p-10 shadow-lg">
         <div className="header flex flex-col items-center gap-5">
           <button
             className="absolute right-3 top-3 self-end rounded-full bg-red-500"
@@ -124,8 +130,10 @@ const ClassDetailModal = ({ data, onModalClose }) => {
           <p className="text-lg font-medium text-gray-500">
             {data["Class Type"]} Session
           </p>
-          <div className="flex gap-3 rounded-xl bg-[#fdf2f8] px-6 py-4 shadow-md transition-[shadow_transform] hover:shadow-lg group">
-            <AlarmClock className={`text-red-500` } />
+          <div className="group flex gap-3 rounded-xl bg-[#fdf2f8] px-6 py-4 shadow-md transition-[shadow_transform] hover:shadow-lg">
+            <AlarmClock
+              className={`group-hover:${rotateFront ? "-rotate-12" : "rotate-12"} text-red-500 transition-transform`}
+            />
             <p>{data["Time"]}</p>
           </div>
         </div>
@@ -163,7 +171,7 @@ const ClassDetailModal = ({ data, onModalClose }) => {
             <h1 className="text-xl font-semibold">Lecturer Information</h1>
           </div>
           <div className="justify-items-center space-y-7">
-            <div className="h-28 w-28 rounded-full border-b-4 border-r-4 border-[#F84178] bg-[url('https://wallpapers.com/images/high/confused-patrick-random-pfp-x63wp9vs43cem64s.webp')] bg-cover shadow-md before:transition-shadow relative before:absolute before:top-0 before:right-0 before:bottom-0 before:left-0 before:hover:shadow-[0_0_36px_#F84178] before:rounded-full before:animate-pulse"></div>
+            <div className="relative h-28 w-28 rounded-full border-b-4 border-r-4 border-[#F84178] bg-[url('https://wallpapers.com/images/high/confused-patrick-random-pfp-x63wp9vs43cem64s.webp')] bg-cover shadow-md before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:animate-pulse before:rounded-full before:transition-shadow before:hover:shadow-[0_0_36px_#F84178]"></div>
             <p className="text-2xl font-semibold">{data["Lecturer"]}</p>
             <p className="font-medium text-gray-500">
               {teacherData
