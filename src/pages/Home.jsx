@@ -9,6 +9,7 @@ import Assignment from "@/components/Assignment";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { useUserGroup } from "@/context/UserGroupContext.jsx";
+import ClassDetailModal from "@/components/ClassDetailModal";
 
 const markedDates = [
   new Date(2025, 1, 23),
@@ -16,6 +17,9 @@ const markedDates = [
   new Date(2025, 2, 20),
 ];
 const Home = () => {
+  const [modalVisibile, setModalVisibile] = React.useState(false);
+  const [selectedRoutine, setselectedRoutine] = React.useState(null);
+
   const { userGroup } = useUserGroup();
   const [todayRoutine, setTodayRoutine] = React.useState([]);
   const [selectedDay, setSelectedDay] = React.useState();
@@ -38,8 +42,22 @@ const Home = () => {
       (data) => data.Day === day && data.Group.includes(group),
     );
   };
+
+  const handleRoutineClick = (routine) => {
+    setselectedRoutine(routine);
+    setModalVisibile(true);
+  };
+
   return (
     <>
+      {modalVisibile && (
+        <div className="fixed inset-0 z-[999] h-full w-full bg-black/20">
+          <ClassDetailModal
+            data={selectedRoutine}
+            onModalClose={() => setModalVisibile(false)}
+          />
+        </div>
+      )}
       <div className="flex flex-wrap px-4 pb-20 md:pb-4 lg:flex-col lg:gap-6">
         <div className="event-card w-full">
           <EventCard />
@@ -49,7 +67,11 @@ const Home = () => {
             <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
             {todayRoutine.length > 0 ? (
               todayRoutine.map((routine, index) => (
-                <RoutineCard key={index} data={routine} />
+                <RoutineCard
+                  key={index}
+                  data={routine}
+                  onRoutineClick={handleRoutineClick}
+                />
               ))
             ) : (
               <div>No classes found for the selected day.</div>

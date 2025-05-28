@@ -12,6 +12,7 @@ import Dashboard from "@/components/admin/Dashboard.jsx";
 import Events from "@/components/admin/Events.jsx";
 import Users from "@/components/admin/Users.jsx";
 import Login from "./pages/Login";
+import ClassDetailModal from "./components/ClassDetailModal";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);

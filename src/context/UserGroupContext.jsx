@@ -9,7 +9,7 @@ export const UserGroupProvider = ({ children }) => {
     localStorage.getItem("user") || "",
   );
   const handleUserGroup = (group) => {
-    localStorage.setItem("user", group);
+    localStorage.setItem("user", JSON.stringify(group));
     setUserGroup(group);
   };
   return (
