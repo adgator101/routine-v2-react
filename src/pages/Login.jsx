@@ -1,81 +1,67 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Eye, EyeOff } from "lucide-react";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
 
 const Login = () => {
-  const [isVisible, setIsVisible] = useState(false);
   return (
     <div>
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-100 to-sky-100 font-poppins">
-        <Card className="m-3 flex flex-col items-center p-3 text-center">
-          <CardHeader>
-            <CardTitle className="text-xl">Login</CardTitle>
-            <CardDescription>Please Login to continue</CardDescription>
-          </CardHeader>
-          <CardContent className="mt-5 space-y-1 text-left sm:w-96">
-            <Label htmlFor="email" className="">
-              Enter email
-            </Label>
-            <Input
-              type="email"
-              placeholder="e.g. np...@gmail.com"
-              className="focus-visible:ring-0"
-            />
-            <div className="h-7"></div>
-            <Label htmlFor="password" className="">
-              Enter password
-            </Label>
-            <div className="relative">
-              <Input
-                type={!isVisible && "password"}
-                placeholder=""
-                className="pr-10 focus-visible:ring-0"
-              />
-              <button
-                onClick={() => setIsVisible(!isVisible)}
-                className="absolute right-2 top-2 text-gray-700"
-              >
-                {!isVisible ? <EyeOff /> : <Eye />}
-              </button>
-            </div>
-          </CardContent>
-          <Button
-            onClick={() => setIsLogin(true)}
-            className="rounded-full bg-[#f84178] px-10 py-5 shadow-[0_2px_5px_#f84178] transition hover:bg-[#f84178] active:scale-90"
-          >
-            Login
-          </Button>
-          <div className="my-5 flex w-full items-center justify-evenly text-gray-400">
-            <div className="h-0.5 w-1/3 flex-shrink-0 bg-gray-300"></div>
-            <p>OR</p>
-            <div className="h-0.5 w-1/3 flex-shrink-0 bg-gray-300"></div>
+        <Card className="grid lg:grid-cols-2 gap-10 p-3 lg:p-20 items-center min-h-screen rounded-none bg-[#F8F7FC] font-manrope">
+          <div className="space-y-7 hidden lg:block">
+            <h1 className="font-bold text-[3rem]">Sign Up to Manage Your Studies & Stay Organized</h1>
+            <p>If you don't have an account you can <span className="text-[#f84178] font-bold cursor-pointer">Register here!</span></p>
           </div>
-          <CardFooter>
-            <a
-              href=""
-              className="flex items-center gap-3 rounded-xl p-3 shadow-[0_1px_3px_gray] transition active:scale-90"
+          <div className="flex flex-col gap-10">
+            <CardHeader className="p-0">
+              <CardTitle className="text-3xl lg:text-4xl">Welcome User</CardTitle>
+            </CardHeader>
+            <CardContent className="text-left w-full xl:w-1/2 p-0">
+              <Label htmlFor="email" className="text-lg">
+                Email
+              </Label>
+              <Input type="email" placeholder="e.g. np...@gmail.com" />
+              <div className="p-3"></div>
+              <Label htmlFor="password" className="text-lg">
+                Password
+              </Label>
+              <Input type="password" placeholder="" />
+            </CardContent>
+            <div>
+            <Button
+              onClick={() => setIsLogin(true)}
+              className="px-10 py-5 bg-[#f84178] hover:bg-[#f84178] shadow-[0_2px_5px_#f84178] active:scale-90 rounded-full transition w-full xl:w-1/2"
             >
-              <img
-                className="h-5 w-5"
-                src="https://cdn.iconscout.com/icon/free/png-512/free-google-logo-icon-download-in-svg-png-gif-file-formats--youtube-pack-logos-icons-1721659.png?f=webp&w=256"
-                alt="google"
-              />
-              <p className="text-sm text-gray-500">Login with Google</p>
-            </a>
-          </CardFooter>
+              Login
+            </Button>
+            <div className="flex items-center justify-evenly text-gray-400 w-full my-5 xl:w-1/2">
+              <div className="flex-shrink-0 h-0.5 w-1/3 bg-gray-300"></div>
+              <p>OR</p>
+              <div className="flex-shrink-0 h-0.5 w-1/3 bg-gray-300"></div>
+            </div>
+            <CardFooter>
+              <a
+                href=""
+                className="p-3 shadow-[0_1px_3px_gray] rounded-xl active:scale-90 transition flex items-center gap-3 xl:w-1/2 w-full justify-center"
+              >
+                <img
+                  className="w-5 h-5"
+                  src="https://cdn.iconscout.com/icon/free/png-512/free-google-logo-icon-download-in-svg-png-gif-file-formats--youtube-pack-logos-icons-1721659.png?f=webp&w=256"
+                  alt="google"
+                />
+                <p className="text-gray-500 text-sm">Login with Google</p>
+              </a>
+            </CardFooter>
+            </div>
+          </div>
         </Card>
-      </div>
     </div>
   );
 };
