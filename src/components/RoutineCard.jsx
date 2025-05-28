@@ -1,11 +1,11 @@
 import React from "react";
 import { BookOpen, Clock, MapPin } from "lucide-react";
 
-const RoutineCard = ({ data }) => {
+const RoutineCard = ({ data, onRoutineClick }) => {
   console.log(data);
 
   return (
-    <div className="flex w-full font-manrope">
+    <div className="flex w-full font-manrope" onClick={()=>onRoutineClick(data)}>
       <div className="group relative my-3 flex min-h-[80px] w-full cursor-pointer items-center justify-between rounded-lg border border-t bg-white p-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md dark:border-gray-700 dark:bg-gray-800 sm:my-4 sm:min-h-[90px] sm:px-5">
         <div className="absolute left-0 top-0 h-full w-1 rounded-l-lg bg-accent/80" />
 

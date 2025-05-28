@@ -10,7 +10,7 @@ import { ChevronDown } from "lucide-react";
 const Onboarding = ({ setUserGroup }) => {
   const [selectedGroup, setSelectedGroup] = useState("");
   const [onBoardingVisible, setonBoardingVisible] = useState(true);
-  const groupNames = ["L4CG1", "L4CG2", "L4CG3", "L4CG4","L4CG5"];
+  const groupNames = ["L4CG1", "L4CG2", "L4CG3", "L4CG4","L4CG5", "L4BG1"];
   const handleNext = () => {
     setUserGroup(selectedGroup);
   };

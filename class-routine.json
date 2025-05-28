@@ -388,5 +388,165 @@
     "Lecturer": "Mr. Arvind Nepal",
     "Group": "L4CG5",
     "Room": "TR - 02 Tamor"
-  }
+  },
+  {
+    "Day": "SUN",
+    "Time": "08:00 AM - 10:00 AM",
+    "Class Type": "Lecture",
+    "Module Code": "4BE002",
+    "Module Title": "The Innovative Business",
+    "Lecturer": "Ms. Rakshya Adhikari ",
+    "Group": "L4BG1",
+    "Room": "TR - 02 Tamor "
+},
+{
+    "Day": "MON",
+    "Time": "10:00 AM - 12:00 PM",
+    "Class Type": "Lecture",
+    "Module Code": "4BU017",
+    "Module Title": "The Digital Business",
+    "Lecturer": "Mr Bikash Sharma",
+    "Group": "L4BG1",
+    "Room": "TR - 03 Barun "
+},
+{
+    "Day": "TUE",
+    "Time": "07:00 AM - 9:00 AM",
+    "Class Type": "Tutorial 1",
+    "Module Code": "4BE002",
+    "Module Title": "The Innovative Business",
+    "Lecturer": "Ms. Rakshya Adhikari ",
+    "Group": "L4BG1",
+    "Room": "TR - 03 Barun "
+},
+{
+    "Day": "TUE",
+    "Time": "10:00 AM - 12:00 PM",
+    "Class Type": "Tutorial 1",
+    "Module Code": "4BU017",
+    "Module Title": "The Digital Business",
+    "Lecturer": "Mr Bikash Sharma",
+    "Group": "L4BG1",
+    "Room": "TR - 03 Barun "
+},
+{
+    "Day": "WED",
+    "Time": "07:00 AM - 9:00 AM",
+    "Class Type": "Tutorial 2",
+    "Module Code": "4BE002",
+    "Module Title": "The Innovative Business",
+    "Lecturer": "Ms. Rakshya Adhikari ",
+    "Group": "L4BG1",
+    "Room": "TR - 01 Koshi"
+},
+{
+    "Day": "WED",
+    "Time": "10:00 AM - 12:00 PM",
+    "Class Type": "Tutorial 2",
+    "Module Code": "4BU017",
+    "Module Title": "The Digital Business",
+    "Lecturer": "Mr Bikash Sharma",
+    "Group": "L4BG1",
+    "Room": "TR - 02 Tamor"
+},
+{
+    "Day": "THU",
+    "Time": "11:00 AM - 2:00 PM",
+    "Class Type": "Workshop",
+    "Module Code": "4BE002",
+    "Module Title": "The Innovative Business",
+    "Lecturer": "Ms. Rakshya Adhikari ",
+    "Group": "L4BG1",
+    "Room": "TR - 03 Barun "
+},
+{
+    "Day": "FRI",
+    "Time": "11:00 AM - 2:00 PM",
+    "Class Type": "Workshop",
+    "Module Code": "4BU017",
+    "Module Title": "The Digital Business",
+    "Lecturer": "Mr Bikash Sharma",
+    "Group": "L4BG1",
+    "Room": "TR - 03 Barun "
+},
+{
+  "Day": "SUN",
+  "Time": "08:00 AM - 10:00 AM",
+  "Class Type": "Lecture",
+  "Module Code": "5LI021",
+  "Module Title": "Researching Leisure",
+  "Lecturer": "Mr Dipesh Neupane",
+  "Group": "L5HM1",
+  "Room": "TR - 03 Barun "
+},
+{
+  "Day": "MON",
+  "Time": "08:00 AM - 10:00 AM",
+  "Class Type": "Lecture",
+  "Module Code": "5BU018",
+  "Module Title": "Customer Acquisition & Retention",
+  "Lecturer": "Ms. Rakshya Adhikari ",
+  "Group": "L5HM1",
+  "Room": "TR - 03 Barun "
+},
+{
+  "Day": "TUE",
+  "Time": "10:00 AM - 12:00 PM",
+  "Class Type": "Tutorial 1",
+  "Module Code": "5LI021",
+  "Module Title": "Researching Leisure",
+  "Lecturer": "Mr Dipesh Neupane",
+  "Group": "L5HM1",
+  "Room": "TR - 01 Koshi"
+},
+{
+  "Day": "TUE",
+  "Time": "1:00 PM - 3:00 PM",
+  "Class Type": "Tutorial 1",
+  "Module Code": "5BU018",
+  "Module Title": "Customer Acquisition & Retention",
+  "Lecturer": "Ms. Rakshya Adhikari ",
+  "Group": "L5HM1",
+  "Room": "TR - 03 Barun "
+},
+{
+  "Day": "WED",
+  "Time": "10:00 AM - 12:00 PM",
+  "Class Type": "Tutorial 2",
+  "Module Code": "5BU018",
+  "Module Title": "Customer Acquisition & Retention",
+  "Lecturer": "Ms. Rakshya Adhikari ",
+  "Group": "L5HM1",
+  "Room": "TR - 03 Barun "
+},
+{
+  "Day": "WED",
+  "Time": "1:00 PM - 3:00 PM",
+  "Class Type": "Tutorial 2",
+  "Module Code": "5LI021",
+  "Module Title": "Researching Leisure",
+  "Lecturer": "Ms.Sami Thapa",
+  "Group": "L5HM1",
+  "Room": "TR - 03 Barun "
+},
+{
+  "Day": "THU",
+  "Time": "10:00 AM - 1:00 PM",
+  "Class Type": "Workshop",
+  "Module Code": "5LI021",
+  "Module Title": "Researching Leisure",
+  "Lecturer": "Mr Dipesh Neupane",
+  "Group": "L5HM1",
+  "Room": "TR - 02 Tamor"
+},
+{
+  "Day": "FRI",
+  "Time": "10:00 AM - 1:00 PM",
+  "Class Type": "Workshop",
+  "Module Code": "5BU018",
+  "Module Title": "Customer Acquisition & Retention",
+  "Lecturer": "Ms. Rakshya Adhikari ",
+  "Group": "L5HM1",
+  "Room": "TR - 02 Tamor"
+}
 ]
