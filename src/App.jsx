@@ -12,6 +12,7 @@ import Dashboard from "@/components/admin/Dashboard.jsx";
 import Events from "@/components/admin/Events.jsx";
 import Users from "@/components/admin/Users.jsx";
 import Login from "./pages/Login";
+import ClassDetailModal from "./components/ClassDetailModal";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -85,7 +86,7 @@ const App = () => {
   return (
     <div className="routine-wrapper dark:bg-dark dark:text-white">
       <Routes>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signin" element={<Login />}></Route>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />

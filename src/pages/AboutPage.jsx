@@ -1,34 +1,119 @@
-import React from 'react';
+import { Github, Linkedin, Mail } from "lucide-react";
+import React from "react";
+
+const teamMembers = [
+  {
+    name: "Aaryan Dhakal",
+    role: "Frontend Developer",
+    pfp: "https://media.discordapp.net/attachments/1351523306058027048/1377326531809906859/1733460356952.png",
+    socials: {
+      mail: "#",
+      linkedin: "#",
+      github: "#",
+    },
+  },
+  {
+    name: "Aaditya Thapa",
+    role: "Frontend Developer",
+    pfp: "https://cdn.discordapp.com/attachments/1351523306058027048/1377326449962254366/1746440524042.png",
+    socials: {
+      mail: "#",
+      linkedin: "#",
+      github: "#",
+    },
+  },
+  {
+    name: "Aayush Budhathoki",
+    role: "Backend Developer",
+    pfp: "https://cdn.discordapp.com/attachments/1351523306058027048/1377326374670434314/1744842012826.png",
+    socials: {
+      mail: "#",
+      linkedin: "#",
+      github: "#",
+    },
+  },
+  {
+    name: "Ganesh Dahal",
+    role: "UI/UX Designer",
+    pfp: "https://cdn.discordapp.com/attachments/1351523306058027048/1377326489703284766/1734780813691.png",
+    socials: {
+      mail: "#",
+      linkedin: "#",
+      github: "#",
+    },
+  },
+];
+
+const SocialIcon = ({ href, children, bg, label }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={label}
+    className={`${bg} rounded-full p-2 text-white transition-all hover:scale-110`}
+  >
+    {children}
+  </a>
+);
 
 const AboutPage = () => {
   return (
-    <div className="min-h-screen bg-[#f7f7f7] dark:bg-dark">
-      <div className="container py-16">
-        <div className="max-w-2xl mx-auto space-y-8">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold font-poppins text-dark dark:text-white">About Us</h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 font-manrope">Building tools to make student life easier</p>
-          </div>
+    <section className="min-h-screen bg-gray-50 px-4 py-16 font-manrope dark:bg-gray-900 sm:px-8">
+      <div className="mx-auto max-w-6xl space-y-8 text-center">
+        <div>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">
+            Meet the Team
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
+            A team of passionate developers crafting tools for a better student
+            experience.
+          </p>
+        </div>
 
-          <div className="grid gap-8 mt-12">
-            <div className="p-6 rounded-4xl bg-card-1 dark:bg-opacity-10">
-              <h2 className="text-xl font-bold font-poppins mb-3">Our Mission</h2>
-              <p className="font-manrope text-gray-700 dark:text-gray-300">We're a small community of IT students creating practical solutions for everyday academic challenges.</p>
-            </div>
+        <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-2">
+          {teamMembers.map((member, index) => (
+            <div
+              key={index}
+              className="flex flex-col items-center rounded-2xl bg-white p-8 text-center shadow-md transition-all hover:shadow-xl dark:bg-gray-800"
+            >
+              <div
+                className="mb-5 h-28 w-28 rounded-full border-4 border-pink-500 bg-cover bg-center shadow-lg"
+                style={{ backgroundImage: `url(${member.pfp})` }}
+                title={member.name}
+              />
+              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+                {member.name}
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400">{member.role}</p>
 
-            <div className="p-6 rounded-4xl bg-card-2 dark:bg-opacity-10">
-              <h2 className="text-xl font-bold font-poppins mb-3">What We Do</h2>
-              <p className="font-manrope text-gray-700 dark:text-gray-300">Our routine management app helps students organize their academic life, making daily tasks more manageable and efficient.</p>
+              <div className="mt-5 flex gap-4">
+                <SocialIcon
+                  href={member.socials.mail}
+                  bg="bg-red-500"
+                  label="Email"
+                >
+                  <Mail size={18} />
+                </SocialIcon>
+                <SocialIcon
+                  href={member.socials.linkedin}
+                  bg="bg-sky-600"
+                  label="LinkedIn"
+                >
+                  <Linkedin size={18} />
+                </SocialIcon>
+                <SocialIcon
+                  href={member.socials.github}
+                  bg="bg-black"
+                  label="GitHub"
+                >
+                  <Github size={18} />
+                </SocialIcon>
+              </div>
             </div>
-
-            <div className="p-6 rounded-4xl bg-card-3 dark:bg-opacity-10">
-              <h2 className="text-xl font-bold font-poppins mb-3">Community First</h2>
-              <p className="font-manrope text-gray-700 dark:text-gray-300">Built by students, for students. We understand your challenges because we face them too.</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

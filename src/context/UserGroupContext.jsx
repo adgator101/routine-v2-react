@@ -6,10 +6,10 @@ export const useUserGroup = () => useContext(UserGroupContext);
 
 export const UserGroupProvider = ({ children }) => {
   const [userGroup, setUserGroup] = useState(
-    localStorage.getItem("user") || "",
+    JSON.parse(localStorage.getItem("user")) || "",
   );
   const handleUserGroup = (group) => {
-    localStorage.setItem("user", group);
+    localStorage.setItem("user", JSON.stringify(group));
     setUserGroup(group);
   };
   return (
