@@ -41,7 +41,7 @@ const NavBar = ({ handleLogout }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [user, setUser] = useState(null);
   useEffect(() => {
-    const userFromStorage = localStorage.getItem("user");
+    const userFromStorage = JSON.parse(localStorage.getItem("user"));
     setUser(userFromStorage);
   }, []);
 

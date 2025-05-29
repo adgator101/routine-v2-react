@@ -86,7 +86,7 @@ const App = () => {
   return (
     <div className="routine-wrapper dark:bg-dark dark:text-white">
       <Routes>
-        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signin" element={<Login />}></Route>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
           <Route path="/home" element={<Home />} />
