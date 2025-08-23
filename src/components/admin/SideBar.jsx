@@ -1,37 +1,54 @@
 import React, { useState } from "react";
 import { LayoutDashboard, User, Calendar, BookCopy } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import {
+  SidebarContent,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
 
 function SideBar() {
-  const [activeItem, setActiveItem] = useState("Dashboard");
+  const location = useLocation();
   const sideBarItems = [
-    { label: "DashBoard", icon: <LayoutDashboard />, path: "/admin/dashboard" },
+    { label: "Dashboard", icon: <LayoutDashboard />, path: "/admin/dashboard" },
     { label: "Users", icon: <User />, path: "/admin/users" },
     { label: "Events", icon: <Calendar />, path: "/admin/events" },
-    { label: "Assignment", icon: <BookCopy />, path: "/admin/assignment" },
+    // { label: "Assignment", icon: <BookCopy />, path: "/admin/assignment" },
   ];
+
   return (
     <>
-      <div className="admin-heading text-center">Admin Panel</div>
-      <div className="admin-body">
-        <nav>
-          <ul className="flex w-full flex-col gap-10 p-2">
-            {sideBarItems.map((item, index) => (
-              <Link
-                to={item.path}
-                key={index}
-                className={`text-md rounded-lg px-4 py-3 ${item.label === activeItem ? "bg-pink-50 text-pink-600" : "hover:bg-gray-50"}`}
-                onClick={() => setActiveItem(item.label)}
-              >
-                <li className={"flex items-center gap-2"}>
-                  {item.icon}
-                  <span>{item.label}</span>
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </nav>
-      </div>
+      <SidebarHeader className="border-b border-sidebar-border">
+        <div className="py-2 text-center text-lg font-semibold text-sidebar-foreground">
+          Admin Panel
+        </div>
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarMenu className="gap-2 p-2">
+          {sideBarItems.map((item, index) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <SidebarMenuItem key={index}>
+                <SidebarMenuButton
+                  asChild
+                  className={`h-16 text-lg ${
+                    isActive
+                      ? "bg-pink-50 text-pink-600 hover:bg-pink-50 hover:text-pink-600"
+                      : "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                  }`}
+                >
+                  <Link to={item.path} className="flex items-center gap-3">
+                    {item.icon}
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            );
+          })}
+        </SidebarMenu>
+      </SidebarContent>
     </>
   );
 }
