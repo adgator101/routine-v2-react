@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LayoutDashboard, User, Calendar, BookCopy } from "lucide-react";
+import { LayoutDashboard, User, Calendar, BookCopy, Group } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   SidebarContent,
@@ -16,6 +16,7 @@ function SideBar() {
     { label: "Users", icon: <User />, path: "/admin/users" },
     { label: "Events", icon: <Calendar />, path: "/admin/events" },
     // { label: "Assignment", icon: <BookCopy />, path: "/admin/assignment" },
+    { label: "Groups", icon: <Group />, path: "/admin/groups" },
   ];
 
   return (
