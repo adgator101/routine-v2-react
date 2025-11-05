@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +10,20 @@ import { ChevronDown } from "lucide-react";
 const Onboarding = ({ setUserGroup }) => {
   const [selectedGroup, setSelectedGroup] = useState("");
   const [onBoardingVisible, setonBoardingVisible] = useState(true);
-  const groupNames = ["L4CG1", "L4CG2", "L4CG3", "L4CG4","L4CG5"];
+  const groupNames = ["L4CG1", "L4CG2", "L4CG3", "L4CG4","L4CG5", "L4BG1"];
   const handleNext = () => {
     setUserGroup(selectedGroup);
   };
+  useEffect(() => {
+    if (onBoardingVisible) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [onBoardingVisible]);
   return (
     <>
       {onBoardingVisible && (

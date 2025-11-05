@@ -8,6 +8,8 @@ import EventCard from "@/components/EventCard";
 import Assignment from "@/components/Assignment";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { useUserGroup } from "@/context/UserGroupContext.jsx";
+import ClassDetailModal from "@/components/ClassDetailModal";
 
 const markedDates = [
   new Date(2025, 1, 23),
@@ -15,19 +17,18 @@ const markedDates = [
   new Date(2025, 2, 20),
 ];
 const Home = () => {
+  const [modalVisibile, setModalVisibile] = React.useState(false);
+  const [selectedRoutine, setselectedRoutine] = React.useState(null);
+
+  const { userGroup } = useUserGroup();
   const [todayRoutine, setTodayRoutine] = React.useState([]);
   const [selectedDay, setSelectedDay] = React.useState();
-  const [userGroup, setUserGroup] = React.useState("");
-  const handleUserGroup = (group) => {
-    localStorage.setItem("user", group);
-    setUserGroup(group);
-  };
-  const user = localStorage.getItem("user");
+
   React.useEffect(() => {
     const dayName = getTodayDay();
     handleSelect(dayName);
     const groupNumber = localStorage.getItem("user");
-    setUserGroup(groupNumber);
+    // setUserGroup(groupNumber);
     setTodayRoutine(handleFilterRoutine(dayName, groupNumber));
   }, [userGroup]);
 
@@ -41,25 +42,51 @@ const Home = () => {
       (data) => data.Day === day && data.Group.includes(group),
     );
   };
+
+  const handleRoutineClick = (routine) => {
+    setselectedRoutine(routine);
+    setModalVisibile(true);
+  };
+
   return (
-    <div className="flex flex-wrap px-4 pb-20 md:pb-4 lg:flex-col lg:gap-6">
-      <div className="event-card w-full">
-        <EventCard />
-      </div>
-      <div className="grid w-full gap-20 lg:grid-cols-[2fr_1fr] lg:gap-10">
-        <div>
-          <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
-          {todayRoutine.length > 0 ? (
-            todayRoutine.map((routine, index) => (
-              <RoutineCard key={index} data={routine} />
-            ))
-          ) : (
-            <div>No classes found for the selected day.</div>
-          )}
-          {!user && <Onboarding setUserGroup={handleUserGroup} />}
+    <>
+      {modalVisibile && (
+        <div className="fixed inset-0 z-[999] h-full w-full bg-black/20">
+          <ClassDetailModal
+            data={selectedRoutine}
+            onModalClose={() => setModalVisibile(false)}
+          />
         </div>
-        <div className="space-y-10">
-          <div className="h-fit w-full rounded-lg border px-6 py-4 dark:border-dark-border dark:bg-dark-card">
+      )}
+      <p className="px-4 font-poppins text-2xl font-semibold">
+        Upcoming Events
+      </p>
+      <div className="px-4 pb-20 md:pb-4 lg:flex lg:gap-6">
+        <div className="">
+          <div className="event-card w-full">
+            <EventCard />
+          </div>
+          <div>
+            <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
+            {todayRoutine.length > 0 ? (
+              todayRoutine.map((routine, index) => (
+                <RoutineCard
+                  key={index}
+                  data={routine}
+                  onRoutineClick={handleRoutineClick}
+                />
+              ))
+            ) : (
+              <img
+                className="w-full max-h-[31.25rem] rounded-2xl shadow-[0_2px_8px_rgba(0,_0,_0,_0.1)] hover:shadow-[0_4px_16px_rgba(0,_0,_0,_0.1)]"
+                src="https://cdn.create.vista.com/api/media/small/320442286/stock-photo-404-error-page-not-found-shocked-man-looks-at-the-error-message-isolated"
+                alt=""
+              />
+            )}
+          </div>
+        </div>
+        <div className="gap-20 lg:w-1/3 lg:gap-10">
+          <div className="my-5 h-fit w-full rounded-xl bg-white px-6 py-4 shadow-[0_2px_8px_rgba(0,_0,_0,_0.1)] hover:shadow-[0_4px_16px_rgba(0,_0,_0,_0.1)] dark:border-dark-border dark:bg-dark-card">
             <DayPicker
               className="justify-items-center py-10 font-manrope lg:scale-105"
               mode="single"
@@ -74,12 +101,12 @@ const Home = () => {
               }}
             />
           </div>
-          <div className="assignment-container h-fit w-full rounded-lg border bg-white p-6 dark:border-dark-border dark:bg-dark-card">
+          <div className="assignment-container h-fit w-full rounded-xl bg-white p-6 shadow-[0_2px_8px_rgba(0,_0,_0,_0.1)] hover:shadow-[0_4px_16px_rgba(0,_0,_0,_0.1)] dark:border-dark-border dark:bg-dark-card">
             <Assignment />
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
