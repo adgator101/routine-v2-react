@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useUserGroup } from "@/context/UserGroupContext.jsx";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   Card,
   CardContent,
@@ -41,24 +41,6 @@ const Login = () => {
 
   const groupData = [
     {
-      batch: "A24",
-      BCS: {
-        groups: ["L4CG1", "L4CG2", "L4CG3", "L4CG4"],
-      },
-      BIBM: {
-        groups: ["L4CG1"],
-      },
-    },
-    {
-      batch: "A25",
-      BCS: {
-        groups: ["L4CG1", "L4CG2"],
-      },
-      BIBM: {
-        groups: ["L4CG1", "L4CG2"],
-      },
-    },
-    {
       batch: "A23",
       BIHM: {
         groups: ["L5HM1"],
@@ -67,6 +49,24 @@ const Login = () => {
         groups: ["L4BG1"],
       },
     },
+    {
+      batch: "A24",
+      BCS: {
+        groups: ["L4CG1", "L4CG2", "L4CG3", "L4CG4"],
+      },
+      BIBM: {
+        groups: ["L4CG1"],
+      },
+    },
+    // {
+    //   batch: "A25",
+    //   BCS: {
+    //     groups: ["L4CG1", "L4CG2"],
+    //   },
+    //   BIBM: {
+    //     groups: ["L4CG1", "L4CG2"],
+    //   },
+    // },
   ];
 
   useEffect(() => {
@@ -87,10 +87,23 @@ const Login = () => {
   }, [selectedCourse, Courses]);
   return (
     <div>
-      <Card className="grid min-h-screen items-center gap-10 rounded-none bg-[#F8F7FC] p-3 font-manrope lg:grid-cols-2 lg:p-20">
+      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[#F8F7FC] px-6 py-4">
+        <div className="flex items-center gap-2">
+          <img
+            src="https://media.discordapp.net/attachments/1134751200651255879/1377511596443566131/image.png?ex=68393b25&is=6837e9a5&hm=8a6f532d6ed1fe48308e1aace5a49871537259c52c22fbe207c61d33d766d8c2&="
+            alt="Logo"
+            // className="h-36 w-36"
+          />
+        </div>
+      </nav>
+      <Card className="grid min-h-screen items-center gap-10 rounded-none bg-[#F8F7FC] p-3 pt-24 font-manrope lg:grid-cols-2 lg:p-20">
         <div className="hidden space-y-7 lg:block">
-          <h1 className="text-[3rem] font-bold">
-            Sign Up to Manage Your Studies & Stay Organized
+          <h1 className="flex flex-col gap-3 text-[2.5rem] font-bold leading-tight">
+            <p>
+              Sign Up and Say{" "}
+              <span className="font-extrabold text-[#f84178]">Goodbye</span>
+            </p>
+            to Messy Schedules <div>Hello to Smart College Planning.</div>
           </h1>
           <p>
             If you don't have an account you can{" "}
