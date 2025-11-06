@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./components/NotFound";
-import { Navigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import MainLayout from "./components/MainLayout";
 import ToDo from "./pages/ToDo";
@@ -13,7 +12,12 @@ import Events from "@/components/admin/Events.jsx";
 import Users from "@/components/admin/Users.jsx";
 import Groups from "@/components/admin/Groups";
 import Login from "./pages/Login";
-import ClassDetailModal from "./components/ClassDetailModal";
+import Signup from "./pages/Signup";
+import {
+  AuthenticatedRoute,
+  UnauthenticatedRoute,
+  PublicRoute,
+} from "@/components/RouteGuards";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -87,21 +91,30 @@ const App = () => {
   return (
     <div className="routine-wrapper dark:bg-dark dark:text-white">
       <Routes>
-        <Route path="/signin" element={<Login />}></Route>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/todo" element={<ToDo />} />
-          <Route path="/about" element={<AboutPage />} />
+        <Route element={<UnauthenticatedRoute />}>
+          <Route path="/auth/login" element={<Login />} />
+          <Route path="/auth/signup" element={<Signup />} />
         </Route>
-        <Route path="/admin" element={<Admin />}>
-          <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="users" element={<Users />} />
-          <Route path="events" element={<Events />} />
-          <Route path="groups" element={<Groups />} />
+        <Route element={<AuthenticatedRoute />}>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/todo" element={<ToDo />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Route>
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route element={<AuthenticatedRoute allowedRoles={["ADMIN"]} />}>
+          <Route path="/admin" element={<Admin />}>
+            <Route index element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="users" element={<Users />} />
+            <Route path="events" element={<Events />} />
+            <Route path="groups" element={<Groups />} />
+          </Route>
+        </Route>
+        <Route element={<PublicRoute />}>
+          <Route path="*" element={<NotFound />} />
+        </Route>
       </Routes>
     </div>
   );
