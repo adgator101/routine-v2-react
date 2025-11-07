@@ -4,6 +4,8 @@ import Notification from "./Notification";
 import { Link } from "react-router-dom";
 import NavItemMobile from "@/components/NavItemMobile.jsx";
 import LogOutButton from "@/components/LogOutButton.jsx";
+import { API_ENDPOINTS } from "@/config/apiConfig";
+import axiosInstance from "@/services/axiosInterceptor";
 
 const navItems = [
   { icon: <House />, path: "/", label: "routine" },
@@ -46,6 +48,7 @@ const NavBar = ({ handleLogout }) => {
   }, []);
 
   useEffect(() => {
+    fetchMe();
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -57,6 +60,14 @@ const NavBar = ({ handleLogout }) => {
   const handleDarkMode = () => {
     setisLight(!isLight);
     document.body.classList.toggle("dark");
+  };
+
+  const fetchMe = async () => {
+    try {
+      const response = await axiosInstance.get(API_ENDPOINTS.profile);
+    } catch (error) {
+      console.error("Error fetching user profile:", error);
+    }
   };
   return (
     <nav className="relative font-poppins lg:mx-auto lg:max-w-8xl">
@@ -70,7 +81,7 @@ const NavBar = ({ handleLogout }) => {
           <div className="space-y-0.5">
             <div className="font-semibold">Hi, {user?.name || "Student"}</div>
             <div className="text-sm">
-              {user?.program || "Computer Science"}, {user || "L4CG3"}
+              {/* {user?.program || "Computer Science"}, {user || "L4CG3"} */}
             </div>
           </div>
         </div>
