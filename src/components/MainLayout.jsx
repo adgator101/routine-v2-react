@@ -16,11 +16,7 @@ const MainLayout = () => {
     localStorage.removeItem("user");
     setUserGroup("");
   };
-  useEffect(() => {
-    if (!userGroup) {
-      navigate("/signin");
-    }
-  }, [userGroup]);
+
   return (
     <>
       {/*Forces user to set their group if it's not available in localStorage*/}
