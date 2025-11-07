@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useUserGroup } from "@/context/UserGroupContext.jsx";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import {
   Card,
@@ -7,231 +6,277 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  CardDescription,
 } from "@/components/ui/card";
-
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuItem,
-  DropdownMenuContent,
-} from "@/components/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
+  ArrowRight,
+  Mail,
+  Lock,
+  Users,
+  Zap,
+  Eye,
+  EyeOff,
+} from "lucide-react";
 import toast from "react-hot-toast";
+import { signIn } from "@/lib/auth";
 
 const Login = () => {
-  const [selectedBatch, setSelectedBatch] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState("");
-  const [selectedGroup, setSelectedGroup] = useState("");
-  const [Courses, setCourses] = useState({});
-  const [groupList, setGroupList] = useState([]);
-  const { setUserGroup } = useUserGroup();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    // e.preventDefault();
-    setUserGroup(selectedGroup);
-    toast.success("Logged in successfully!");
-    setTimeout(() => {
-      navigate("/");
-    }, 700);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const groupData = [
-    {
-      batch: "A23",
-      BIHM: {
-        groups: ["L5HM1"],
-      },
-      BIBM: {
-        groups: ["L4BG1"],
-      },
-    },
-    {
-      batch: "A24",
-      BCS: {
-        groups: ["L4CG1", "L4CG2", "L4CG3", "L4CG4"],
-      },
-      BIBM: {
-        groups: ["L4CG1"],
-      },
-    },
-    // {
-    //   batch: "A25",
-    //   BCS: {
-    //     groups: ["L4CG1", "L4CG2"],
-    //   },
-    //   BIBM: {
-    //     groups: ["L4CG1", "L4CG2"],
-    //   },
-    // },
-  ];
-
-  useEffect(() => {
-    const found = groupData.find((b) => b.batch === selectedBatch);
-    setCourses(found || {});
-    setSelectedCourse("");
-    setSelectedGroup("");
-    setGroupList([]);
-  }, [selectedBatch]);
-
-  useEffect(() => {
-    if (selectedCourse && Courses[selectedCourse]) {
-      setGroupList(Courses[selectedCourse].groups);
-    } else {
-      setGroupList([]);
+  const validateForm = () => {
+    if (!formData.email.trim()) {
+      toast.error("Please enter your email");
+      return false;
     }
-    setSelectedGroup("");
-  }, [selectedCourse, Courses]);
+    if (!formData.email.includes("@")) {
+      toast.error("Please enter a valid email");
+      return false;
+    }
+    if (!formData.password) {
+      toast.error("Please enter your password");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    setIsLoading(true);
+    try {
+      await signIn.email({
+        email: formData.email,
+        password: formData.password, 
+        callbackURL: "/",
+      });
+
+      toast.success("Logged in successfully!");
+      setTimeout(() => {
+        navigate("/");
+      }, 700);
+    } catch (error) {
+      toast.error(error.message || "Failed to login");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div>
-      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between bg-[#F8F7FC] px-6 py-4">
+    <div className="h-screen overflow-hidden bg-gradient-to-br from-[#F8F7FC] via-[#FFF5F8] to-[#F8F7FC]">
+      {/* Navigation */}
+      <nav className="fixed left-0 top-0 z-50 flex w-full items-center bg-gradient-to-r from-[#F8F7FC]/60 via-[#FFF5F8]/60 to-[#F8F7FC]/60 px-6 py-3 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <img
             src="https://media.discordapp.net/attachments/1134751200651255879/1377511596443566131/image.png?ex=68393b25&is=6837e9a5&hm=8a6f532d6ed1fe48308e1aace5a49871537259c52c22fbe207c61d33d766d8c2&="
             alt="Logo"
-            // className="h-36 w-36"
+            className="h-10"
           />
         </div>
       </nav>
-      <Card className="grid min-h-screen items-center gap-10 rounded-none bg-[#F8F7FC] p-3 pt-24 font-manrope lg:grid-cols-2 lg:p-20">
-        <div className="hidden space-y-7 lg:block">
-          <h1 className="flex flex-col gap-3 text-[2.5rem] font-bold leading-tight">
-            <p>
-              Sign Up and Say{" "}
-              <span className="font-extrabold text-[#f84178]">Goodbye</span>
-            </p>
-            to Messy Schedules <div>Hello to Smart College Planning.</div>
-          </h1>
-          <p>
-            If you don't have an account you can{" "}
-            <span className="cursor-pointer font-bold text-[#f84178]">
-              Register here!
-            </span>
-          </p>
-        </div>
-        <div className="flex flex-col gap-10 lg:justify-self-center">
-          <CardHeader className="p-0">
-            <CardTitle className="text-3xl lg:text-4xl">Welcome User</CardTitle>
-          </CardHeader>
-          <CardContent className="p-0 text-left lg:w-96">
-            <Label htmlFor="email" className="text-lg">
-              Email
-            </Label>
-            <Input type="email" placeholder="e.g. np...@gmail.com" />
-            <div className="p-3"></div>
-            <Label htmlFor="password" className="text-lg">
-              Password
-            </Label>
-            <Input type="password" placeholder="" />
-          </CardContent>
-          <div className="flex flex-wrap items-center gap-5 md:max-w-sm">
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex w-44 items-center justify-between rounded-lg border border-gray-300 bg-white px-5 py-3 text-gray-700 shadow-sm hover:border-gray-400 focus:outline-none">
-                <span className="font-medium">
-                  {selectedBatch || "Select Batch"}
-                </span>
-                <ChevronDown size={18} />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-44 rounded-md p-1">
-                {groupData.map((batch) => (
-                  <DropdownMenuItem
-                    key={batch.batch}
-                    onClick={() => {
-                      setSelectedBatch(batch.batch);
-                      setSelectedCourse("");
-                      setSelectedGroup("");
-                    }}
-                    className="cursor-pointer rounded-md px-4 py-2 text-gray-700 hover:bg-accent/10 hover:text-accent"
-                  >
-                    {batch.batch}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
 
-            {selectedBatch && (
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex w-44 items-center justify-between rounded-lg border border-gray-300 bg-white px-5 py-3 text-gray-700 shadow-sm hover:border-gray-400 focus:outline-none">
-                  <span className="font-medium">
-                    {selectedCourse || "Select Course"}
-                  </span>
-                  <ChevronDown size={18} />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-44 rounded-md p-1">
-                  {Object.keys(Courses)
-                    .filter((k) => k !== "batch")
-                    .map((Course) => (
-                      <DropdownMenuItem
-                        key={Course}
-                        onClick={() => {
-                          setSelectedCourse(Course);
-                          setSelectedGroup("");
-                        }}
-                        className="cursor-pointer rounded-md px-4 py-2 text-gray-700 hover:bg-accent/10 hover:text-accent"
-                      >
-                        {Course}
-                      </DropdownMenuItem>
-                    ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
-
-            {selectedCourse && (
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex w-44 items-center justify-between rounded-lg border border-gray-300 bg-white px-5 py-3 text-gray-700 shadow-sm hover:border-gray-400 focus:outline-none">
-                  <span className="font-medium">
-                    {selectedGroup || "Select Group"}
-                  </span>
-                  <ChevronDown size={18} />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-44 rounded-md p-1">
-                  {groupList.map((group) => (
-                    <DropdownMenuItem
-                      key={group}
-                      onClick={() => setSelectedGroup(group)}
-                      className="cursor-pointer rounded-md px-4 py-2 text-gray-700 hover:bg-accent/10 hover:text-accent"
-                    >
-                      {group}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
-          </div>
-          <div>
-            <Button
-              onClick={() => {
-                // setIsLogin(true);
-                handleSubmit();
-              }}
-              className="w-full rounded-full bg-[#f84178] px-10 py-5 shadow-[0_2px_5px_#f84178] transition hover:bg-[#f84178] active:scale-90"
-            >
-              Login
-            </Button>
-            <div className="my-5 flex w-full items-center justify-evenly text-gray-400">
-              <div className="h-0.5 w-1/3 flex-shrink-0 bg-gray-300"></div>
-              <p>OR</p>
-              <div className="h-0.5 w-1/3 flex-shrink-0 bg-gray-300"></div>
+      {/* Main Content */}
+      <div className="flex h-screen items-center justify-center overflow-y-auto p-3 pt-16 font-manrope lg:pt-20">
+        <div className="grid w-full max-w-7xl items-center gap-8 lg:grid-cols-2 lg:gap-16">
+          {/* Left Section - Hero */}
+          <div className="hidden space-y-6 lg:block">
+            <div className="inline-block rounded-full bg-gradient-to-r from-[#f84178]/10 to-[#f84178]/5 px-3 py-1.5">
+              <p className="text-xs font-semibold text-[#f84178]">
+                🚀 Welcome Back
+              </p>
             </div>
-            <CardFooter>
-              <a
-                href=""
-                className="flex w-full items-center justify-center gap-3 rounded-xl p-3 shadow-[0_1px_3px_gray] transition active:scale-90"
-              >
-                <img
-                  className="h-5 w-5"
-                  src="https://cdn.iconscout.com/icon/free/png-512/free-google-logo-icon-download-in-svg-png-gif-file-formats--youtube-pack-logos-icons-1721659.png?f=webp&w=256"
-                  alt="google"
-                />
-                <p className="text-sm text-gray-500">Login with Google</p>
-              </a>
-            </CardFooter>
+            <h1 className="flex flex-col gap-2 text-[2.5rem] font-bold leading-tight">
+              <p>
+                Get Back to Your{" "}
+                <span className="bg-gradient-to-r from-[#f84178] to-[#ff6b9d] bg-clip-text text-transparent">
+                  Schedule
+                </span>
+              </p>
+              <p>in Seconds</p>
+            </h1>
+            <p className="text-base text-gray-600">
+              Access your personalized routine, stay on top of your classes,
+              and manage your academic life efficiently.
+            </p>
+            <div className="flex flex-col gap-3 pt-2">
+              <div className="flex items-center gap-3">
+                <div className="rounded-full bg-[#f84178]/10 p-2">
+                  <Zap className="h-4 w-4 text-[#f84178]" />
+                </div>
+                <p className="text-sm text-gray-700">
+                  Instant access to your routine
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="rounded-full bg-[#f84178]/10 p-2">
+                  <Users className="h-4 w-4 text-[#f84178]" />
+                </div>
+                <p className="text-sm text-gray-700">
+                  Connect with classmates quickly
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="rounded-full bg-[#f84178]/10 p-2">
+                  <Lock className="h-4 w-4 text-[#f84178]" />
+                </div>
+                <p className="text-sm text-gray-700">Secure & reliable</p>
+              </div>
+            </div>
+
+            <div className="pt-8">
+              <p className="text-sm text-gray-600">
+                Don't have an account?{" "}
+                <Link
+                  to="/signup"
+                  className="font-semibold text-[#f84178] hover:underline"
+                >
+                  Sign up now
+                </Link>
+              </p>
+            </div>
+          </div>
+
+          {/* Right Section - Form */}
+          <div className="flex justify-center lg:justify-end">
+            <Card className="w-full max-w-md border-none bg-white/80 shadow-2xl shadow-[#f84178]/5 backdrop-blur-sm">
+              <CardHeader className="space-y-1 pb-4">
+                <CardTitle className="text-2xl font-bold lg:text-3xl">
+                  Welcome Back
+                </CardTitle>
+                <CardDescription className="text-sm">
+                  Sign in to your account
+                </CardDescription>
+              </CardHeader>
+
+              <form onSubmit={handleSubmit}>
+                <CardContent className="space-y-3.5">
+                  {/* Email Field */}
+                  <div className="space-y-1.5">
+                    <Label htmlFor="email" className="text-sm font-medium">
+                      Email Address
+                    </Label>
+                    <div className="relative">
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="np...@gmail.com"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="h-10 pl-9 text-sm transition-all focus:ring-2 focus:ring-[#f84178]/20"
+                      />
+                      <Mail className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                    </div>
+                  </div>
+
+                  {/* Password Field */}
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between">
+                      <Label htmlFor="password" className="text-sm font-medium">
+                        Password
+                      </Label>
+                      <Link
+                        to="#"
+                        className="text-xs text-[#f84178] hover:underline font-medium"
+                      >
+                        Forgot password?
+                      </Link>
+                    </div>
+                    <div className="relative">
+                      <Input
+                        id="password"
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Enter your password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        className="h-10 pl-9 pr-9 text-sm transition-all focus:ring-2 focus:ring-[#f84178]/20"
+                      />
+                      <Lock className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600"
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                </CardContent>
+
+                <CardFooter className="flex flex-col gap-3 pt-2">
+                  <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="h-10 w-full rounded-full bg-gradient-to-r from-[#f84178] to-[#ff6b9d] text-sm font-semibold text-white shadow-lg shadow-[#f84178]/30 transition-all hover:shadow-xl hover:shadow-[#f84178]/40 active:scale-95 disabled:opacity-50"
+                  >
+                    {isLoading ? (
+                      "Signing in..."
+                    ) : (
+                      <>
+                        Sign In
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </>
+                    )}
+                  </Button>
+
+                  <div className="flex w-full items-center gap-3 text-gray-400">
+                    <div className="h-px flex-1 bg-gray-300"></div>
+                    <p className="text-xs">OR</p>
+                    <div className="h-px flex-1 bg-gray-300"></div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-gray-200 bg-white py-2 transition-all hover:border-gray-300 hover:shadow-md active:scale-95"
+                  >
+                    <img
+                      className="h-4 w-4"
+                      src="https://cdn.iconscout.com/icon/free/png-512/free-google-logo-icon-download-in-svg-png-gif-file-formats--youtube-pack-logos-icons-1721659.png?f=webp&w=256"
+                      alt="google"
+                    />
+                    <p className="text-xs font-medium text-gray-700">
+                      Sign in with Google
+                    </p>
+                  </button>
+
+                  <p className="text-center text-xs text-gray-600">
+                    Don't have an account?{" "}
+                    <Link
+                      to="/auth/signup"
+                      className="font-semibold text-[#f84178] hover:underline"
+                    >
+                      Create one
+                    </Link>
+                  </p>
+                </CardFooter>
+              </form>
+            </Card>
           </div>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };
