@@ -3,13 +3,14 @@ import { getAllGroups } from "@/services/groupServices";
 import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Pencil, Trash2 } from "lucide-react";
+import Loading from "@/components/admin/Loading";
 
 const Groups = () => {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchGroups = async () => {
+    const fetchAllGroups = async () => {
       try {
         const data = await getAllGroups();
         setGroups(data);
@@ -19,34 +20,34 @@ const Groups = () => {
         setLoading(false);
       }
     };
-    fetchGroups();
+    fetchAllGroups();
   }, []);
 
-  if (loading) return <div className="p-6 text-center">Loading groups...</div>;
+  if (loading) return <Loading />;
 
   return (
-    <div className="p-6">
+    <>
       <h2 className="mb-6 text-2xl font-bold">Groups</h2>
       <div className="rounded-lg border bg-background shadow">
-        <Table>
+        <Table className="text-sm">
           <TableHeader>
-            <TableRow>
-              <TableHead className="w-[60px]">#</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead className="w-[120px] text-right">Actions</TableHead>
+            <TableRow className="h-8">
+              <TableHead className="w-[60px] py-2 px-3">#</TableHead>
+              <TableHead className="py-2 px-3">Name</TableHead>
+              <TableHead className="w-[120px] text-right py-2 px-3">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {groups.map((group, idx) => (
-              <TableRow key={group.id || group.name}>
-                <TableCell>{idx + 1}</TableCell>
-                <TableCell>{group.name}</TableCell>
-                <TableCell className="flex justify-end gap-2">
+              <TableRow key={group.id || group.name} className="h-8">
+                <TableCell className="py-2 px-3">{idx + 1}</TableCell>
+                <TableCell className="py-2 px-3 font-medium">{group.name}</TableCell>
+                <TableCell className="py-2 px-3 flex justify-end gap-2">
                   <Button size="icon" variant="ghost" aria-label="Edit group">
-                    <Pencil className="h-4 w-4" />
+                    <Pencil />
                   </Button>
                   <Button size="icon" variant="destructive" aria-label="Delete group">
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 />
                   </Button>
                 </TableCell>
               </TableRow>
@@ -54,7 +55,7 @@ const Groups = () => {
           </TableBody>
         </Table>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./components/NotFound";
 import { toast } from "react-hot-toast";
 import MainLayout from "./components/MainLayout";
 import ToDo from "./pages/ToDo";
 import AboutPage from "./pages/AboutPage";
-import Admin from "@/pages/Admin.jsx";
-import Dashboard from "@/components/admin/Dashboard.jsx";
-import Events from "@/components/admin/Events.jsx";
-import Users from "@/components/admin/Users.jsx";
-import Groups from "@/components/admin/Groups";
+import Admin from "@/pages/admin/Admin.jsx";
+import Dashboard from "@/pages/admin/Dashboard.jsx";
+import Users from "@/pages/admin/Users.jsx";
+import Groups from "@/pages/admin/Groups";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import {
@@ -18,6 +17,9 @@ import {
   UnauthenticatedRoute,
   PublicRoute,
 } from "@/components/RouteGuards";
+import Teachers from "@/pages/admin/Teachers";
+import Modules from "@/pages/admin/Modules";
+import Rooms from "@/pages/admin/Rooms";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -105,11 +107,13 @@ const App = () => {
         </Route>
         <Route element={<AuthenticatedRoute allowedRoles={["ADMIN"]} />}>
           <Route path="/admin" element={<Admin />}>
-            <Route index element={<Dashboard />} />
+            <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="users" element={<Users />} />
-            <Route path="events" element={<Events />} />
             <Route path="groups" element={<Groups />} />
+            <Route path="teachers" element={<Teachers />} />
+            <Route path="modules" element={<Modules />} />
+            <Route path="rooms" element={<Rooms />} />
           </Route>
         </Route>
         <Route element={<PublicRoute />}>
