@@ -17,6 +17,9 @@ export const getAllTeachers = async () => {
 export const updateTeacherById = async (id, data) => {
   try {
     const response = await axiosInstance.put(`${API_ENDPOINTS.teachers}/${id}`, data);
+    if (!response.data) {
+      throw new Error("No data found");
+    }
     return response.data.data;
   } catch (error) {
     console.error("Error updating teacher:", error);
@@ -27,6 +30,9 @@ export const updateTeacherById = async (id, data) => {
 export const deleteTeacherById = async (id) => {
   try {
     const response = await axiosInstance.delete(`${API_ENDPOINTS.teachers}/${id}`);
+    if (!response.data) {
+      throw new Error("No data found");
+    }
     return response.data.data;
   } catch (error) {
     console.error("Error deleting teacher:", error);

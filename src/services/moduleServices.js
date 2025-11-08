@@ -17,6 +17,9 @@ export const getAllModules = async () => {
 export const updateModuleById = async (id, data) => {
   try {
     const response = await axiosInstance.put(`${API_ENDPOINTS.modules}/${id}`, data);
+    if (!response.data) {
+      throw new Error("No data found");
+    }
     return response.data.data;
   } catch (error) {
     console.error("Error updating module:", error);
@@ -27,6 +30,9 @@ export const updateModuleById = async (id, data) => {
 export const deleteModuleById = async (id) => {
   try {
     const response = await axiosInstance.delete(`${API_ENDPOINTS.modules}/${id}`);
+    if (!response.data) {
+      throw new Error("No data found");
+    }
     return response.data.data;
   } catch (error) {
     console.error("Error deleting module:", error);

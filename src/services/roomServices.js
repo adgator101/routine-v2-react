@@ -17,6 +17,9 @@ export const getAllRooms = async () => {
 export const updateRoomById = async (id, data) => {
   try {
     const response = await axiosInstance.put(`${API_ENDPOINTS.rooms}/${id}`, data);
+    if (!response.data) {
+      throw new Error("No data found");
+    }
     return response.data.data;
   } catch (error) {
     console.error("Error updating room:", error);
@@ -27,6 +30,9 @@ export const updateRoomById = async (id, data) => {
 export const deleteRoomById = async (id) => {
   try {
     const response = await axiosInstance.delete(`${API_ENDPOINTS.rooms}/${id}`);
+    if (!response.data) {
+      throw new Error("No data found");
+    }
     return response.data.data;
   } catch (error) {
     console.error("Error deleting room:", error);

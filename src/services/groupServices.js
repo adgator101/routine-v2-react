@@ -17,6 +17,9 @@ export const getAllGroups = async () => {
 export const updateGroupById = async (id, data) => {
   try {
     const response = await axiosInstance.put(`${API_ENDPOINTS.groups}/${id}`, data);
+    if (!response.data) {
+      throw new Error("No data found");
+    }
     return response.data.data;
   } catch (error) {
     console.error("Error updating group:", error);
@@ -27,6 +30,9 @@ export const updateGroupById = async (id, data) => {
 export const deleteGroupById = async (id) => {
   try {
     const response = await axiosInstance.delete(`${API_ENDPOINTS.groups}/${id}`);
+    if (!response.data) {
+      throw new Error("No data found")
+    }
     return response.data.data;
   } catch (error) {
     console.error("Error deleting group:", error);
