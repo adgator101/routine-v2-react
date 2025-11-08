@@ -32,8 +32,7 @@ import {
 import toast from "react-hot-toast";
 import { signUp } from "@/lib/auth";
 
-import { API_ENDPOINTS } from "@/config/apiConfig";
-import axiosInstance from "@/services/axiosInterceptor";
+import { getAllGroups } from "@/services/groupServices";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -55,9 +54,9 @@ const Signup = () => {
 
   const fetchGroups = async () => {
     try {
-      const response = await axiosInstance.get(API_ENDPOINTS.groupList);
-      console.log(response.data);
-      setGroupList(response.data.data);
+      const data = await getAllGroups();
+      console.log(data);
+      setGroupList(data);
     } catch (error) {
       console.error(error);
     }
