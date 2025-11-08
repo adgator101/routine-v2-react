@@ -1,8 +1,9 @@
+import { API_ENDPOINTS } from "@/config/apiConfig";
 import axiosInstance from "./axiosInterceptor";
 
 export const getAllGroups = async () => {
   try {
-    const response = await axiosInstance.get("/groups");
+    const response = await axiosInstance.get(API_ENDPOINTS.groups);
     if (!response.data) {
       throw new Error("No data found");
     }
