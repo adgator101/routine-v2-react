@@ -13,3 +13,23 @@ export const getAllGroups = async () => {
     throw error;
   }
 };
+
+export const updateGroupById = async (id, data) => {
+  try {
+    const response = await axiosInstance.put(`${API_ENDPOINTS.groups}/${id}`, data);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error updating group:", error);
+    throw error;
+  }
+};
+
+export const deleteGroupById = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`${API_ENDPOINTS.groups}/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error deleting group:", error);
+    throw error;
+  }
+};

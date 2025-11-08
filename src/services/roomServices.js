@@ -13,3 +13,23 @@ export const getAllRooms = async () => {
     throw error;
   }
 };
+
+export const updateRoomById = async (id, data) => {
+  try {
+    const response = await axiosInstance.put(`${API_ENDPOINTS.rooms}/${id}`, data);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error updating room:", error);
+    throw error;
+  }
+};
+
+export const deleteRoomById = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`${API_ENDPOINTS.rooms}/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error deleting room:", error);
+    throw error;
+  }
+};

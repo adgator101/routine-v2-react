@@ -13,3 +13,23 @@ export const getAllModules = async () => {
     throw error;
   }
 };
+
+export const updateModuleById = async (id, data) => {
+  try {
+    const response = await axiosInstance.put(`${API_ENDPOINTS.modules}/${id}`, data);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error updating module:", error);
+    throw error;
+  }
+};
+
+export const deleteModuleById = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`${API_ENDPOINTS.modules}/${id}`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error deleting module:", error);
+    throw error;
+  }
+};

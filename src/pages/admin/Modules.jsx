@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Edit, Trash2 } from "lucide-react";
 import { getAllModules } from "@/services/moduleServices";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Loading from "@/components/admin/Loading";
@@ -35,6 +36,7 @@ const Modules = () => {
               <TableHead className="py-4 px-5">Name</TableHead>
               <TableHead className="py-4 px-5">Code</TableHead>
               <TableHead className="py-4 px-5">Description</TableHead>
+              <TableHead className="py-4 px-5 w-[80px]">Actions</TableHead> {/* Add Actions column */}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -44,6 +46,14 @@ const Modules = () => {
                 <TableCell className="py-4 px-5 font-medium">{module.name}</TableCell>
                 <TableCell className="py-4 px-5">{module.moduleCode}</TableCell>
                 <TableCell className="py-4 px-5">{module.description || <span className="text-gray-400">—</span>}</TableCell>
+                <TableCell className="py-4 px-5 flex gap-2">
+                  <button className="text-blue-500 hover:text-blue-700" title="Edit">
+                    <Edit size={18} />
+                  </button>
+                  <button className="text-red-500 hover:text-red-700" title="Delete">
+                    <Trash2 size={18} />
+                  </button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

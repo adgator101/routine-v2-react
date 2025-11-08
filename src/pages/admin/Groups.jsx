@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllGroups } from "@/services/groupServices";
-import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Pencil, Trash2 } from "lucide-react";
+import { Edit, Trash2 } from "lucide-react";
 import Loading from "@/components/admin/Loading";
 
 const Groups = () => {
@@ -32,23 +31,23 @@ const Groups = () => {
         <Table className="text-sm">
           <TableHeader>
             <TableRow className="h-8">
-              <TableHead className="w-[60px] py-2 px-3">#</TableHead>
-              <TableHead className="py-2 px-3">Name</TableHead>
-              <TableHead className="w-[120px] text-right py-2 px-3">Actions</TableHead>
+              <TableHead className="w-[60px] py-4 px-6">#</TableHead>
+              <TableHead className="py-4 px-6">Name</TableHead>
+              <TableHead className="w-[120px] py-4 px-6">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {groups.map((group, idx) => (
               <TableRow key={group.id || group.name} className="h-8">
-                <TableCell className="py-2 px-3">{idx + 1}</TableCell>
-                <TableCell className="py-2 px-3 font-medium">{group.name}</TableCell>
-                <TableCell className="py-2 px-3 flex justify-end gap-2">
-                  <Button size="icon" variant="ghost" aria-label="Edit group">
-                    <Pencil />
-                  </Button>
-                  <Button size="icon" variant="destructive" aria-label="Delete group">
-                    <Trash2 />
-                  </Button>
+                <TableCell className="py-4 px-6">{idx + 1}</TableCell>
+                <TableCell className="py-4 px-6 font-medium">{group.name}</TableCell>
+                <TableCell className="py-4 px-6 flex gap-2">
+                  <button className="text-blue-500 hover:text-blue-700" title="Edit">
+                    <Edit size={18} />
+                  </button>
+                  <button className="text-red-500 hover:text-red-700" title="Delete">
+                    <Trash2 size={18} />
+                  </button>
                 </TableCell>
               </TableRow>
             ))}
