@@ -2,18 +2,9 @@ import React from 'react';
 import { Check, Trash, Clock } from 'lucide-react';
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { formatUnixTimestamp } from "../lib/dateUtils";
 
 const TodoCard = ({todoItem, handleComplete, handleRemove}) => {
-    const formatDate = (unixTimestamp) => {
-        const date = new Date(unixTimestamp * 1000);
-        return date.toLocaleDateString('en-US', {
-            month: 'short',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    };
-
     const getPriorityConfig = (priority) => {
         const configs = {
             low: {
@@ -76,7 +67,7 @@ const TodoCard = ({todoItem, handleComplete, handleRemove}) => {
                         <div className="mt-4 flex items-center gap-4 text-sm text-gray-500">
                             <div className="flex items-center gap-2">
                                 <Clock className="w-4 h-4" />
-                                <span>{formatDate(todoItem.dueDate)}</span>
+                                <span>{formatUnixTimestamp(todoItem.dueDate)}</span>
                             </div>
                             <div className="h-4 w-px bg-gray-200" />
                             <Badge

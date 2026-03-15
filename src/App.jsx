@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./components/NotFound";
 import { toast } from "react-hot-toast";
 import MainLayout from "./components/MainLayout";
-import ToDo from "./pages/ToDo";
+// import ToDo from "./pages/ToDo"; // TODO: Re-enable when todo feature is ready
 import AboutPage from "./pages/AboutPage";
 import Admin from "@/pages/admin/Admin.jsx";
 import Dashboard from "@/pages/admin/Dashboard.jsx";
@@ -111,7 +111,8 @@ const App = () => {
           >
             <Route index element={<Home />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/todo" element={<ToDo />} />
+            {/* TODO: Re-enable when todo feature is ready */}
+            {/* <Route path="/todo" element={<ToDo />} /> */}
             <Route path="/about" element={<AboutPage />} />
           </Route>
         </Route>

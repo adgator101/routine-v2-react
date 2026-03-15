@@ -1,119 +1,180 @@
-import { Github, Linkedin, Mail } from "lucide-react";
-import React from "react";
+import { Github, Linkedin, Mail, BookOpen, Users, Zap, Shield } from "lucide-react";
+
+const fallbackProfileImage = "/icon.png";
 
 const teamMembers = [
   {
     name: "Aaryan Dhakal",
     role: "Frontend Developer",
-    pfp: "https://media.discordapp.net/attachments/1351523306058027048/1377326531809906859/1733460356952.png",
-    socials: {
-      mail: "#",
-      linkedin: "#",
-      github: "#",
-    },
+    pfp: fallbackProfileImage,
+    socials: { mail: "#", linkedin: "#", github: "#" },
   },
   {
     name: "Aaditya Thapa",
-    role: "Frontend Developer",
-    pfp: "https://cdn.discordapp.com/attachments/1351523306058027048/1377326449962254366/1746440524042.png",
-    socials: {
-      mail: "#",
-      linkedin: "#",
-      github: "#",
-    },
+    role: "FullStack Developer",
+    pfp: fallbackProfileImage,
+    socials: { mail: "#", linkedin: "#", github: "#" },
   },
   {
     name: "Aayush Budhathoki",
-    role: "Backend Developer",
-    pfp: "https://cdn.discordapp.com/attachments/1351523306058027048/1377326374670434314/1744842012826.png",
-    socials: {
-      mail: "#",
-      linkedin: "#",
-      github: "#",
-    },
+    role: "App Developer",
+    pfp: fallbackProfileImage,
+    socials: { mail: "#", linkedin: "#", github: "#" },
   },
   {
     name: "Ganesh Dahal",
     role: "UI/UX Designer",
-    pfp: "https://cdn.discordapp.com/attachments/1351523306058027048/1377326489703284766/1734780813691.png",
-    socials: {
-      mail: "#",
-      linkedin: "#",
-      github: "#",
-    },
+    pfp: fallbackProfileImage,
+    socials: { mail: "#", linkedin: "#", github: "#" },
   },
 ];
 
-const SocialIcon = ({ href, children, bg, label }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label={label}
-    className={`${bg} rounded-full p-2 text-white transition-all hover:scale-110`}
-  >
-    {children}
-  </a>
-);
+const features = [
+  // {
+  //   icon: <BookOpen size={20} />,
+  //   title: "Smart Routines",
+  //   desc: "View your class schedule day-by-day with real-time slot awareness.",
+  // },
+  {
+    icon: <Zap size={20} />,
+    title: "Instant Updates",
+    desc: "Changes to modules, rooms, or teachers reflect immediately.",
+  },
+  {
+    icon: <Users size={20} />,
+    title: "Group-aware",
+    desc: "Routines are scoped to your group so you always see what's relevant.",
+  },
+ 
+];
 
 const AboutPage = () => {
+  const hasLink = (value) => value && value !== "#";
+
   return (
-    <section className="min-h-screen bg-gray-50 px-4 py-16 font-manrope dark:bg-gray-900 sm:px-8">
-      <div className="mx-auto max-w-6xl space-y-8 text-center">
-        <div>
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white md:text-5xl">
-            Meet the Team
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-            A team of passionate developers crafting tools for a better student
-            experience.
-          </p>
-        </div>
+    <div className="px-4 pb-24 font-manrope md:pb-6 lg:mx-auto lg:max-w-8xl">
+      <section className="rounded-3xl border border-gray-200 bg-white px-6 py-8 shadow-sm dark:border-dark-border dark:bg-dark-card md:px-8 md:py-10">
+        <span className="inline-flex rounded-full border border-accent/30 bg-accent/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-accent">
+          Built by DevSphere Community
+        </span>
+        <h1 className="mt-4 font-poppins text-3xl font-bold text-gray-900 dark:text-gray-100 md:text-4xl">
+          Routine Application
+        </h1>
+        <p className="mt-3 max-w-3xl text-sm leading-relaxed text-gray-500 dark:text-gray-400 md:text-base">
+          A collaborative academic platform that helps students and admins stay
+          in sync with routines, updates, and classroom information.
+        </p>
+      </section>
 
-        <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-2">
-          {teamMembers.map((member, index) => (
+      <section className="mt-6">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {features.map((feature) => (
             <div
-              key={index}
-              className="flex flex-col items-center rounded-2xl bg-white p-8 text-center shadow-md transition-all hover:shadow-xl dark:bg-gray-800"
+              key={feature.title}
+              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-dark-border dark:bg-dark-card"
             >
-              <div
-                className="mb-5 h-28 w-28 rounded-full border-4 border-pink-500 bg-cover bg-center shadow-lg"
-                style={{ backgroundImage: `url(${member.pfp})` }}
-                title={member.name}
-              />
-              <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
-                {member.name}
-              </h2>
-              <p className="text-gray-500 dark:text-gray-400">{member.role}</p>
-
-              <div className="mt-5 flex gap-4">
-                <SocialIcon
-                  href={member.socials.mail}
-                  bg="bg-red-500"
-                  label="Email"
-                >
-                  <Mail size={18} />
-                </SocialIcon>
-                <SocialIcon
-                  href={member.socials.linkedin}
-                  bg="bg-sky-600"
-                  label="LinkedIn"
-                >
-                  <Linkedin size={18} />
-                </SocialIcon>
-                <SocialIcon
-                  href={member.socials.github}
-                  bg="bg-black"
-                  label="GitHub"
-                >
-                  <Github size={18} />
-                </SocialIcon>
+              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent">
+                {feature.icon}
               </div>
+              <h2 className="font-poppins text-base font-semibold text-gray-900 dark:text-gray-100">
+                {feature.title}
+              </h2>
+              <p className="mt-1.5 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
+                {feature.desc}
+              </p>
             </div>
           ))}
         </div>
+      </section>
+
+      <section className="mt-6 rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-dark-border dark:bg-dark-card md:p-8">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h2 className="font-poppins text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Team DevSphere
+            </h2>
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+              The people behind design, frontend, and backend delivery.
+            </p>
+          </div>
+          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500">
+            Core contributors
+          </p>
+        </div>
+
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {teamMembers.map((member) => (
+            <article
+              key={member.name}
+              className="rounded-2xl border border-gray-200 bg-gray-50 p-4 transition-shadow hover:shadow-md dark:border-dark-border dark:bg-gray-900"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={member.pfp}
+                  alt={member.name}
+                  onError={(event) => {
+                    event.currentTarget.src = fallbackProfileImage;
+                  }}
+                  className="h-14 w-14 rounded-full object-cover ring-2 ring-white dark:ring-gray-800"
+                />
+                <div className="min-w-0">
+                  <h3 className="truncate font-poppins text-sm font-semibold text-gray-900 dark:text-gray-100">
+                    {member.name}
+                  </h3>
+                  <p className="text-xs font-medium text-accent">{member.role}</p>
+                </div>
+              </div>
+
+              <div className="mt-4 flex items-center gap-2">
+                <a
+                  href={member.socials.mail}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Email ${member.name}`}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition-colors dark:border-gray-700 ${
+                    hasLink(member.socials.mail)
+                      ? "hover:border-red-400 hover:text-red-500"
+                      : "pointer-events-none opacity-50"
+                  }`}
+                >
+                  <Mail size={14} />
+                </a>
+                <a
+                  href={member.socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`LinkedIn ${member.name}`}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition-colors dark:border-gray-700 ${
+                    hasLink(member.socials.linkedin)
+                      ? "hover:border-sky-500 hover:text-sky-500"
+                      : "pointer-events-none opacity-50"
+                  }`}
+                >
+                  <Linkedin size={14} />
+                </a>
+                <a
+                  href={member.socials.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`GitHub ${member.name}`}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full border border-gray-200 text-gray-500 transition-colors dark:border-gray-700 ${
+                    hasLink(member.socials.github)
+                      ? "hover:border-gray-900 hover:text-gray-900 dark:hover:border-white dark:hover:text-white"
+                      : "pointer-events-none opacity-50"
+                  }`}
+                >
+                  <Github size={14} />
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <div className="mt-6 text-center text-xs text-gray-400 dark:text-gray-500">
+        © {new Date().getFullYear()} DevSphere Community · Made with ♥ for students
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,35 +1,27 @@
 import React from "react";
-import RoutineData from "../../class-routine.json";
 import { getTodayDay } from "@/lib/utils";
-import Onboarding from "@/components/Onboarding";
 import DateButton from "@/components/DateButton";
 import RoutineCard from "@/components/RoutineCard";
 import EventCard from "@/components/EventCard";
-import Assignment from "@/components/Assignment";
-import { DayPicker } from "react-day-picker";
-import "react-day-picker/dist/style.css";
-import { useUserGroup } from "@/context/UserGroupContext.jsx";
+import MiniCalendar from "@/components/MiniCalendar";
 import ClassDetailModal from "@/components/ClassDetailModal";
 import { useRoutines } from "@/hooks/useRoutines";
 import { useEffect } from "react";
+import { CalendarDays } from "lucide-react";
 
 const markedDates = [
-  new Date(2025, 1, 23),
-  new Date(2025, 2, 15),
-  new Date(2025, 2, 20),
+  new Date(2026, 2, 15),
+  new Date(2026, 2, 20),
+  new Date(2026, 3, 2),
 ];
+
 const Home = () => {
   const { routineData } = useRoutines();
   const [modalVisibile, setModalVisibile] = React.useState(false);
   const [selectedRoutine, setselectedRoutine] = React.useState(null);
 
-  // const { userGroup } = useUserGroup();
   const [todayRoutine, setTodayRoutine] = React.useState([]);
   const [selectedDay, setSelectedDay] = React.useState();
-
-  // React.useEffect(() => {
-
-  // }, [userGroup]);
 
   const handleSelect = (day) => {
     setSelectedDay(day);
@@ -41,7 +33,6 @@ const Home = () => {
     const filteredRoutine = routineData.week.filter(
       (routine) => routine.day?.toLowerCase() === day?.toLowerCase(),
     );
-    console.log("Filtered Routine:", filteredRoutine);
     return filteredRoutine.flatMap((routine) => routine.slots || []);
   };
 
@@ -53,67 +44,71 @@ const Home = () => {
   useEffect(() => {
     if (!routineData) return;
     const dayName = getTodayDay();
-    console.log("Routine Data :", dayName);
     handleSelect(dayName);
-    // setUserGroup(groupNumber);
     setTodayRoutine(handleFilterRoutine(dayName));
   }, [routineData]);
 
   return (
     <>
-      {modalVisibile && (
-        <div className="fixed inset-0 z-[999] h-full w-full bg-black/20">
-          <ClassDetailModal
-            data={selectedRoutine}
-            onModalClose={() => setModalVisibile(false)}
-          />
-        </div>
+      {/* Modal overlay */}
+      {modalVisibile && selectedRoutine && (
+        <ClassDetailModal
+          data={selectedRoutine}
+          onModalClose={() => setModalVisibile(false)}
+        />
       )}
-      <p className="px-4 font-poppins text-2xl font-semibold">
-        Upcoming Events
-      </p>
-      <div className="px-4 pb-20 md:pb-4 lg:flex lg:gap-6 justify-between">
-        <div className="">
-          <div className="event-card w-full">
-            <EventCard />
-          </div>
-          <div>
+
+      {/* Page wrapper */}
+      <div className="px-4 pb-24 md:pb-6 lg:mx-auto lg:max-w-8xl">
+
+        {/* ── Upcoming Events ───────────────────────────── */}
+        <section className="mt-2">
+          <h2 className="mb-1 font-poppins text-xl font-bold text-gray-900 dark:text-gray-100">
+            Upcoming Events
+          </h2>
+          <EventCard />
+        </section>
+
+        {/* ── Main two-column layout ─────────────────────── */}
+        <div className="mt-4 lg:flex lg:items-start lg:gap-6">
+
+          {/* ── Left column: day picker + routine list ─── */}
+          <div className="flex-1 min-w-0">
             <DateButton selectedDay={selectedDay} handleSelect={handleSelect} />
-            {todayRoutine.length > 0 ? (
-              todayRoutine.map((routine, index) => (
-                <RoutineCard
-                  key={index}
-                  data={routine}
-                  onRoutineClick={handleRoutineClick}
-                />
-              ))
-            ) : (
-              <img
-                className="max-h-[31.25rem] w-full rounded-2xl shadow-[0_2px_8px_rgba(0,_0,_0,_0.1)] hover:shadow-[0_4px_16px_rgba(0,_0,_0,_0.1)]"
-                src="https://cdn.create.vista.com/api/media/small/320442286/stock-photo-404-error-page-not-found-shocked-man-looks-at-the-error-message-isolated"
-                alt=""
-              />
-            )}
+
+            <div className="mt-3">
+              {todayRoutine.length > 0 ? (
+                <div className="space-y-2">
+                  {todayRoutine.map((routine, index) => (
+                    <RoutineCard
+                      key={index}
+                      data={routine}
+                      onRoutineClick={handleRoutineClick}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-gray-200 bg-white py-10 text-center shadow-sm dark:border-gray-700 dark:bg-dark-card">
+                  <CalendarDays size={40} className="mb-3 text-[#F84178]/40" />
+                  <p className="font-poppins font-semibold text-gray-500 dark:text-gray-400">
+                    No classes scheduled
+                  </p>
+                  <p className="mt-1 text-sm text-gray-400">
+                    Enjoy your free day!
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="gap-20 lg:w-1/3 lg:gap-10">
-          <div className="my-5 h-fit w-full rounded-xl bg-white px-6 py-4 shadow-[0_2px_8px_rgba(0,_0,_0,_0.1)] hover:shadow-[0_4px_16px_rgba(0,_0,_0,_0.1)] dark:border-dark-border dark:bg-dark-card">
-            <DayPicker
-              className="justify-items-center py-10 font-manrope lg:scale-105"
-              mode="single"
-              selected={null}
-              modifiers={{ marked: markedDates }}
-              modifiersStyles={{
-                marked: {
-                  backgroundColor: "#ffeb3b",
-                  borderRadius: "50%",
-                  color: "#000",
-                },
-              }}
-            />
-          </div>
-          <div className="assignment-container h-fit w-full rounded-xl bg-white p-6 shadow-[0_2px_8px_rgba(0,_0,_0,_0.1)] hover:shadow-[0_4px_16px_rgba(0,_0,_0,_0.1)] dark:border-dark-border dark:bg-dark-card">
-            <Assignment />
+
+          {/* ── Right column: calendar + assignments ─── */}
+          <div className="mt-4 lg:mt-0 lg:w-80 xl:w-96">
+
+            {/* Calendar card */}
+            <div className="rounded-2xl bg-white px-5 py-5 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:bg-dark-card">
+              <MiniCalendar markedDates={markedDates} />
+            </div>
+
           </div>
         </div>
       </div>
@@ -122,3 +117,4 @@ const Home = () => {
 };
 
 export default Home;
+
