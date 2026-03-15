@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import axiosInstance from "@/services/axiosInterceptor";
 import { API_ENDPOINTS } from "@/config/apiConfig";
 import SyncStatModal from "@/components/admin/SyncStatModal";
+import { Hourglass } from "lucide-react";
 
 const Routines = () => {
   const [routineData, setRoutineData] = useState(null);
@@ -59,7 +60,7 @@ const Routines = () => {
   // Initial fetch
   useEffect(() => {
     if (selectedGroup) {
-      fetchRoutineData();
+      fetchRoutineData(selectedGroup.id);
     } else {
       setRoutineData(null);
       setIsLoading(false);
@@ -94,15 +95,12 @@ const Routines = () => {
   // Handle group chip click
   const handleGroupSelect = (group) => {
     if (selectedGroup?.id === group.id) {
-      // setSelectedGroup(null);
-      // fetchRoutineData();
       const firstGroup = groups[0];
       if (firstGroup && firstGroup.id !== group.id) {
         setSelectedGroup(firstGroup);
       }
     } else {
       setSelectedGroup(group);
-      fetchRoutineData(group.id);
     }
   };
 
@@ -275,8 +273,17 @@ const Routines = () => {
       setIsSyncModalVisibile(true);
       setSyncStats(result.data);
     } catch (error) {
-      console.log(error);
-      toast.error("Failed to sync routines");
+      const code = error?.response?.data?.error?.code;
+      const message = error?.response?.data?.error?.message;
+
+      if (code === "SYNC_IN_PROGRESS") {
+        toast.error(message || "A weekly sync is already running. Please wait for it to finish.", {
+          duration: 5000,
+          icon: <Hourglass className="h-6 w-6 text-yellow-500" />,
+        });
+      } else {
+        toast.error("Failed to sync routines");
+      }
     } finally {
       setIsSyncing(false);
     }
