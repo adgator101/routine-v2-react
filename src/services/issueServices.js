@@ -48,7 +48,6 @@ export const updateIssue = async (issueId, issueData) => {
 
 export const updateIssueStatus = async (issueId, status) => {
   try {
-    console.log(`Making PATCH request to: ${API_ENDPOINTS.issuesAdmin}/${issueId}/status with status:`, status);
     const response = await axiosInstance.patch(`${API_ENDPOINTS.issuesAdmin}/${issueId}/status`, {
       status,
     });
@@ -58,11 +57,6 @@ export const updateIssueStatus = async (issueId, status) => {
     return response.data.data;
   } catch (error) {
     console.error("Error updating issue status:", error);
-    console.error("Request details:", {
-      url: `/admin/${issueId}/status`,
-      method: 'PATCH',
-      status
-    });
     throw error;
   }
 };
