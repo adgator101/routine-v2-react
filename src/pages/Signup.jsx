@@ -55,10 +55,9 @@ const Signup = () => {
   const fetchGroups = async () => {
     try {
       const data = await getAllGroups();
-      console.log(data);
       setGroupList(data);
     } catch (error) {
-      console.error(error);
+      console.error("Failed to fetch groups:", error);
     }
   };
 
@@ -79,8 +78,9 @@ const Signup = () => {
       toast.error("Please enter your email");
       return false;
     }
-    if (!formData.email.includes("@")) {
-      toast.error("Please enter a valid email");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      toast.error("Please enter a valid email address");
       return false;
     }
     if (formData.password.length < 8) {
@@ -89,6 +89,10 @@ const Signup = () => {
     }
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
+      return false;
+    }
+    if (!selectedGroup || !selectedGroup.id) {
+      toast.error("Please select your group");
       return false;
     }
     return true;
