@@ -20,7 +20,7 @@ const ToDo = () => {
     );
 
     setTodoList(updatedTodoList);
-    localStorage.setItem("tasks", JSON.stringify(todoList));
+    localStorage.setItem("tasks", JSON.stringify(updatedTodoList));
   };
   useEffect(() => {
     const todos = JSON.parse(localStorage.getItem("tasks"));

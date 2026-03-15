@@ -1,5 +1,5 @@
-import { Bell, House, ListCheck, Moon, Sun, User } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { Bell, House, /* ListCheck, */ Moon, Sun, User } from "lucide-react";
+import { useEffect, useState } from "react";
 import Notification from "./Notification";
 import { Link } from "react-router-dom";
 import NavItemMobile from "@/components/NavItemMobile.jsx";
@@ -9,7 +9,8 @@ import axiosInstance from "@/services/axiosInterceptor";
 
 const navItems = [
   { icon: <House />, path: "/", label: "routine" },
-  { icon: <ListCheck />, path: "/todo", label: "todo" },
+  // TODO: Re-enable when todo feature is ready
+  // { icon: <ListCheck />, path: "/todo", label: "todo" },
   { icon: <User />, path: "/about", label: "about us" },
 ];
 

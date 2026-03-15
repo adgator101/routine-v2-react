@@ -12,7 +12,6 @@ export const RoutineProvider = ({ children }) => {
       try {
         const data = await fetchUserRoutines();
         setRoutineData(data);
-        console.log("User routines fetched:", data);
       } catch (error) {
         console.error("Failed to fetch user routines:", error);
       }

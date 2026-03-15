@@ -1,10 +1,10 @@
-export const API_BASE_URL = "http://localhost:3000/api";
+export const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 export const API_ENDPOINTS = {
   signup: "/auth/signup",
   login: "/auth/login",
 
-  profile: "user/profile",
+  profile: "/user/profile",
   
   groups: "/groups",
   modules: "/module",
@@ -20,5 +20,6 @@ export const API_ENDPOINTS = {
   issuesAdminStats: "/issues/admin/stats",
   myIssues: "/issues/my-issues",
 
-  users: "/user/users"
+  users: "/user/users",
+  usersSearch: "/user/users/search"
 };

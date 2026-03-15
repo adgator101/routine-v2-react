@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
-import Onboarding from "@/components/Onboarding.jsx";
 import { useUserGroup } from "@/context/UserGroupContext.jsx";
+import { signOut } from "@/lib/auth";
 
 const MainLayout = () => {
-  const { userGroup, setUserGroup } = useUserGroup();
+  const { setUserGroup } = useUserGroup();
   const navigate = useNavigate();
 
-  const handleUserGroup = (group) => {
-    localStorage.setItem("user", group);
-    setUserGroup(group);
-  };
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUserGroup("");
+  const handleLogout = async () => {
+    try {
+      await signOut();
+    } catch (_error) {
+      // ignore signOut errors — clear local state regardless
+    } finally {
+      localStorage.removeItem("user");
+      setUserGroup(null);
+      navigate("/auth/login", { replace: true });
+    }
   };
 
   return (
     <>
-      {/*Forces user to set their group if it's not available in localStorage*/}
-      <>
-        <header className="border-b-2 dark:border-dark-border dark:bg-dark-card">
-          <NavBar handleLogout={handleLogout} />
-        </header>
-        <div className="mt-10 lg:mx-auto lg:max-w-8xl">
-          <Outlet />
-        </div>
-      </>
+      <header className="border-b-2 dark:border-dark-border dark:bg-dark-card">
+        <NavBar handleLogout={handleLogout} />
+      </header>
+      <div className="mt-10 lg:mx-auto lg:max-w-8xl">
+        <Outlet />
+      </div>
     </>
   );
 };

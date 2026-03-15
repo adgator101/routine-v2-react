@@ -45,8 +45,9 @@ const Login = () => {
       toast.error("Please enter your email");
       return false;
     }
-    if (!formData.email.includes("@")) {
-      toast.error("Please enter a valid email");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      toast.error("Please enter a valid email address");
       return false;
     }
     if (!formData.password) {
